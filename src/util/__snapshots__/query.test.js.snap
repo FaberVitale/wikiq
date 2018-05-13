@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`src/util/query getOpenSearchURL 1`] = `"https://en.wikipedia.org/w/api.php?action=opensearch&search=rem&limit=10&namespace=0&format=json&origin=*"`;
+
+exports[`src/util/query getOpenSearchURL 2`] = `"https://en.wikipedia.org/w/api.php?action=opensearch&search=rem&limit=30&namespace=0&format=json&origin=*"`;
+
+exports[`src/util/query getPDFLink 1`] = `"https://en.wikipedia.org/api/rest_v1/page/pdf/stan"`;
+
+exports[`src/util/query getPDFLink 2`] = `"https://en.wikipedia.org/api/rest_v1/page/pdf/sting"`;
+
+exports[`src/util/query getThumbnailURL 1`] = `"https://en.wikipedia.org/w/api.php?action=query&titles=as|rem|tik|tak&prop=pageimages&format=json&origin=*&pithumbsize=100"`;
+
+exports[`src/util/query getThumbnailURL 2`] = `"https://en.wikipedia.org/w/api.php?action=query&titles=as|rem|tik|tak&prop=pageimages&format=json&origin=*&pithumbsize=300"`;

@@ -1,0 +1,15 @@
+[ignore]
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/coverage/.*
+<PROJECT_ROOT>/.vscode/.*
+<PROJECT_ROOT>/public/.*
+<PROJECT_ROOT>/node_modules/eslint-plugin-jsx-a11y/*
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

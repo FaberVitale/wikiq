@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`src/selectors getArticles 1`] = `
+Array [
+  Object {
+    "info": Object {
+      "description": "Rem or REM may refer to:",
+      "link": "https://en.wikipedia.org/wiki/Rem",
+      "title": "Rem",
+    },
+    "thumbnail": null,
+  },
+  Object {
+    "info": Object {
+      "description": "Rembrandt Harmenszoon van Rijn (; Dutch: [ˈrɛmbrɑnt ˈɦɑrmə(n)soːn vɑn ˈrɛin] ( listen); 15 July 1606 – 4 October 1669) was a Dutch draughtsman, painter, and printmaker.",
+      "link": "https://en.wikipedia.org/wiki/Rembrandt",
+      "title": "Rembrandt",
+    },
+    "thumbnail": Object {
+      "height": 280,
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg/216px-Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg",
+      "width": 216,
+    },
+  },
+  Object {
+    "info": Object {
+      "description": "In electronics, a remote control is a component of an electronic device used to operate the device from a distance, usually wirelessly.",
+      "link": "https://en.wikipedia.org/wiki/Remote_control",
+      "title": "Remote control",
+    },
+    "thumbnail": Object {
+      "height": 202,
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Siri_Remote_and_old_Apple_Remote.JPG/280px-Siri_Remote_and_old_Apple_Remote.JPG",
+      "width": 280,
+    },
+  },
+  Object {
+    "info": Object {
+      "description": "Reminisce Mackie (née Smith; May 30, 1980), known professionally as Remy Ma, is an American rapper. She was initially discovered by Big Pun, and came to prominence for her work as a member of Fat Joe’s group, Terror Squad.",
+      "link": "https://en.wikipedia.org/wiki/Remy_Ma",
+      "title": "Remy Ma",
+    },
+    "thumbnail": Object {
+      "height": 280,
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Remy_MA_BET_AWARDS_2016.jpg/206px-Remy_MA_BET_AWARDS_2016.jpg",
+      "width": 206,
+    },
+  },
+  Object {
+    "info": Object {
+      "description": "Remembrance Day (sometimes known informally as Poppy Day) is a memorial day observed in Commonwealth of Nations member states since the end of the First World War to remember the members of their armed forces who have died in the line of duty.",
+      "link": "https://en.wikipedia.org/wiki/Remembrance_Day",
+      "title": "Remembrance Day",
+    },
+    "thumbnail": Object {
+      "height": 280,
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cenotaph_London.jpg/185px-Cenotaph_London.jpg",
+      "width": 185,
+    },
+  },
+  Object {
+    "info": Object {
+      "description": "Remington Arms Company, LLC is an American manufacturer of firearms and ammunition in the United States.",
+      "link": "https://en.wikipedia.org/wiki/Remington_Arms",
+      "title": "Remington Arms",
+    },
+    "thumbnail": null,
+  },
+  Object {
+    "info": Object {
+      "description": "A remittance is a transfer of money by a foreign worker to an individual in his or her home country. Money sent home by migrants competes with international aid as one of the largest financial inflows to developing countries.",
+      "link": "https://en.wikipedia.org/wiki/Remittance",
+      "title": "Remittance",
+    },
+    "thumbnail": Object {
+      "height": 186,
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Remittance_advert_Oxford_Street_London_20060909.jpg/280px-Remittance_advert_Oxford_Street_London_20060909.jpg",
+      "width": 280,
+    },
+  },
+  Object {
+    "info": Object {
+      "description": "Remain in Light is the fourth studio album by American new wave band Talking Heads, released on October 8, 1980 through Sire Records.",
+      "link": "https://en.wikipedia.org/wiki/Remain_in_Light",
+      "title": "Remain in Light",
+    },
+    "thumbnail": null,
+  },
+  Object {
+    "info": Object {
+      "description": "The removal of cannabis from Schedule I of the Controlled Substances Act, the most tightly restricted category reserved for drugs that have \\"no currently accepted medical use,\\" has been proposed repeatedly since 1972.",
+      "link": "https://en.wikipedia.org/wiki/Removal_of_cannabis_from_Schedule_I_of_the_Controlled_Substances_Act",
+      "title": "Removal of cannabis from Schedule I of the Controlled Substances Act",
+    },
+    "thumbnail": null,
+  },
+  Object {
+    "info": Object {
+      "description": "The remembrance poppy is an artificial flower that has been used since 1921 to commemorate military personnel who have died in war, and represents a common or field poppy, Papaver rhoeas.",
+      "link": "https://en.wikipedia.org/wiki/Remembrance_poppy",
+      "title": "Remembrance poppy",
+    },
+    "thumbnail": Object {
+      "height": 187,
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Field_poppy_-_Papaver_rhoeas_%2812190335083%29.jpg/280px-Field_poppy_-_Papaver_rhoeas_%2812190335083%29.jpg",
+      "width": 280,
+    },
+  },
+]
+`;

@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "typescript.autoImportSuggestions.enabled": false,
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "editor.rulers": [80],
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "javascript.validate.enable": false
+}
