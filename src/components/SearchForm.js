@@ -1,8 +1,8 @@
 //@flow
 import React from "react";
 import withStyles from "material-ui/styles/withStyles";
-import Search from "material-ui-icons/Search";
-import Clear from "material-ui-icons/Clear";
+import Search from "@material-ui/icons/Search";
+import Clear from "@material-ui/icons/Clear";
 import IconButton from "material-ui/IconButton";
 import Select from "./Select";
 import type { ViewProps } from "../containers/SearchForm";

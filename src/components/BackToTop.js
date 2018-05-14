@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import Button from "material-ui/Button";
-import ExpandLess from "material-ui-icons/ExpandLess";
+import ExpandLess from "@material-ui/icons/ExpandLess";
 import Zoom from "material-ui/transitions/Zoom";
 import { withScrollListener } from "../containers/ScrollListener";
 

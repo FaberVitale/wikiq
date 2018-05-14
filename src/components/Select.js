@@ -3,7 +3,7 @@ import React from "react";
 import withStyles from "material-ui/styles/withStyles";
 import { pure } from "recompose";
 import { noop } from "../util/functions";
-import ArrowDropDown from "material-ui-icons/ArrowDropDown";
+import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import ButtonBase from "material-ui/ButtonBase";
 import { contrastText } from "../theme";
 
