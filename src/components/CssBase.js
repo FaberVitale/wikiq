@@ -1,6 +1,6 @@
 //@flow
 import React from "react";
-import withStyles from "material-ui/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { REACT_ROOT_ID, APPBAR_MIN_HEIGHT } from "../config";
 
 type Props = {||};

@@ -1,10 +1,10 @@
 //@flow
 import React from "react";
-import withStyles from "material-ui/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { pure } from "recompose";
 import { noop } from "../util/functions";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
-import ButtonBase from "material-ui/ButtonBase";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import { contrastText } from "../theme";
 
 const styles = {

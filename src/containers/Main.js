@@ -2,7 +2,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { routes, BACK_TO_TOP_THRESHOLD } from "../config";
-import withStyles from "material-ui/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import SearchResults from "../components/SearchResults";
 import BackToTop from "../components/BackToTop";
 import { nothing as Nothing } from "../util/functions";

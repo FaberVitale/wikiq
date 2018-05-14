@@ -1,8 +1,8 @@
 //@flow
 import React from "react";
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 import ExpandLess from "@material-ui/icons/ExpandLess";
-import Zoom from "material-ui/transitions/Zoom";
+import Zoom from "@material-ui/core/Zoom";
 import { withScrollListener } from "../containers/ScrollListener";
 
 type Props = {

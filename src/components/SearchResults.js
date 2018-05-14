@@ -1,8 +1,8 @@
 //@flow
 import React, { Fragment } from "react";
-import Typography from "material-ui/Typography";
+import Typography from "@material-ui/core/Typography";
 import { mapProps } from "recompose";
-import withStyles from "material-ui/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { deslugify } from "../util/query";
 import ArticlesContainer from "../containers/Articles";
 import Articles from "./Articles";
@@ -10,8 +10,8 @@ import { LOCALES_TO_LANGUAGE } from "../config";
 import { xsDown } from "../theme";
 import { ERROR_MESSAGE, NO_RESULTS, SEARCH_COMPLETED } from "../config";
 import BottomPage from "../components/BottomPage";
-import CircularProgress from "material-ui/Progress/CircularProgress";
-import Button from "material-ui/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
 import { $html } from "../util/dom";
 
 const renderPropArticles = props => {

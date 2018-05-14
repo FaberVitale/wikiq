@@ -2,7 +2,7 @@
 import React from "react";
 import ArticleCard from "./ArticleCard";
 import { PAGINATION_SIZE } from "../config";
-import Fade from "material-ui/transitions/Fade";
+import Fade from "@material-ui/core/Fade";
 import type { WikiArticle } from "../reducers";
 
 type Props = {

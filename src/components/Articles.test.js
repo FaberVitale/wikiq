@@ -1,4 +1,4 @@
-import { createMount } from "material-ui/test-utils";
+import { createMount } from "@material-ui/core/test-utils";
 import { articles, lang, thumbnails, ids, query } from "../__mocks__/reducers";
 import React from "react";
 import Articles from "./Articles";

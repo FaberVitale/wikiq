@@ -1,5 +1,5 @@
 //@flow
-import { createMuiTheme } from "material-ui/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 // use theme same breakpoints for both themes
 const breakpoints = {
