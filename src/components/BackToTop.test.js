@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createShallow } from "material-ui/test-utils";
+import { createShallow } from "@material-ui/core/test-utils";
 import BackToTop, { BaseComponent } from "./BackToTop";
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 import { noop } from "../util/functions";
 
 describe("src/components/BackToTop", () => {

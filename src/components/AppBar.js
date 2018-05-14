@@ -1,6 +1,6 @@
 //@flow
 import React from "react";
-import withStyles from "material-ui/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { default as SearchForm } from "../containers/SearchForm";
 import { default as LightBulb } from "../components/LightBulbButton";
 import { APP_TITLE, APPBAR_MIN_HEIGHT } from "../config";

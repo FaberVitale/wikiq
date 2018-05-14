@@ -1,5 +1,5 @@
 import ArticleCard from "./ArticleCard";
-import { createMount } from "material-ui/test-utils";
+import { createMount } from "@material-ui/core/test-utils";
 import { articles, lang, thumbnails } from "../__mocks__/reducers";
 import React from "react";
 

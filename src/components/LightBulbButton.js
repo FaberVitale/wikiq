@@ -1,8 +1,8 @@
 //@flow
 import React from "react";
-import SvgIcon from "material-ui/SvgIcon";
-import IconButton from "material-ui/IconButton";
-import withStyles from "material-ui/styles/withStyles";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import IconButton from "@material-ui/core/IconButton";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { contrastText } from "../theme";
 
 const styles = {

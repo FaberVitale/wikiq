@@ -1,7 +1,7 @@
 //@flow
 import * as React from "react";
 import CssBase from "../components/CssBase";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import * as themes from "../theme";
 import AppBar from "../components/AppBar";
 import { BrowserRouter as Router } from "react-router-dom";
