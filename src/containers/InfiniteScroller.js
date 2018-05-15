@@ -42,7 +42,8 @@ class InfiniteScroller extends React.Component<
       isLoadingMore,
       scrollY,
       viewportHeight,
-      load
+      load,
+      loadMore
     } = this.props;
 
     const shouldLoadSearch = data == null && error == null;
@@ -60,7 +61,7 @@ class InfiniteScroller extends React.Component<
       const isBodyLargerThanView = scrollHeight > viewportHeight;
 
       if (isBodyLargerThanView && isInInfiniteScrollRange) {
-        this.props.loadMore();
+        loadMore();
       }
     }
   };
@@ -79,5 +80,8 @@ class InfiniteScroller extends React.Component<
     return render(rest);
   }
 }
+
+// for testing only
+export const BaseComponent = InfiniteScroller;
 
 export default withViewport(withScroll(InfiniteScroller));
