@@ -6,8 +6,8 @@ import Button from "@material-ui/core/Button";
 import { noop } from "../util/functions";
 
 describe("src/components/BackToTop", () => {
-  const propsFactory = (pageYOffset = 0, threshold = 0, scrollTo = noop) => ({
-    pageYOffset,
+  const propsFactory = (scrollY = 0, threshold = 0, scrollTo = noop) => ({
+    scrollY,
     threshold,
     scrollTo
   });
@@ -29,7 +29,7 @@ describe("src/components/BackToTop", () => {
     expect(wrapper.find(Button)).toHaveLength(1);
   });
 
-  it("is collapsed if pageYOffset is lower than the threshold", () => {
+  it("is collapsed if scrollY is lower than the threshold", () => {
     const props = propsFactory(0, 1);
 
     wrapper = shallow(<BaseComponent {...props} />);
@@ -41,7 +41,7 @@ describe("src/components/BackToTop", () => {
     expect(jqObj.attr("aria-hidden")).toBe("true");
   });
 
-  it("is visible if  if pageYOffset is greater than threshold", () => {
+  it("is visible if  if scrollY is greater than threshold", () => {
     const props = propsFactory(5, 1);
     wrapper = shallow(<BaseComponent {...props} />);
 
