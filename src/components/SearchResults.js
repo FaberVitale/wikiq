@@ -23,7 +23,7 @@ const renderPropArticles = props => {
     lang,
     query,
     loadMore,
-    innerHeight
+    viewportHeight
   } = props;
 
   let articles = data;
@@ -61,7 +61,8 @@ const renderPropArticles = props => {
   } else if (hasMore) {
     const scrollHeight = $html ? $html.scrollHeight : -1;
 
-    const isBodyLargerThanView = scrollHeight > 1 && scrollHeight > innerHeight;
+    const isBodyLargerThanView =
+      scrollHeight > 1 && scrollHeight > viewportHeight;
 
     bottomPageChild = !isBodyLargerThanView ? (
       <Button variant="raised" color="secondary" onClick={loadMore}>

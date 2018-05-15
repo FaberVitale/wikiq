@@ -7,7 +7,8 @@ import SearchResults from "../components/SearchResults";
 import BackToTop from "../components/BackToTop";
 import { nothing as Nothing } from "../util/functions";
 import { scrollTo } from "../util/dom";
-import { ScrollListenerProvider } from "./ScrollListener";
+import { ScrollProvider } from "./Scroll";
+import { ViewportProvider } from "./Viewport";
 import { shadows } from "../theme";
 
 const styles = {
@@ -38,16 +39,18 @@ type Props = {
 class Main extends React.Component<Props> {
   render() {
     return (
-      <ScrollListenerProvider>
-        <main className={this.props.classes.main}>
-          <Switch>
-            <Route exact path={routes.search} component={SearchResults} />
-            <Route exact path={routes.home} component={Nothing} />
-            <Redirect exact from="*" to={routes.home} />
-          </Switch>
-          <BackToTop threshold={BACK_TO_TOP_THRESHOLD} scrollTo={scrollTo} />
-        </main>
-      </ScrollListenerProvider>
+      <ViewportProvider>
+        <ScrollProvider>
+          <main className={this.props.classes.main}>
+            <Switch>
+              <Route exact path={routes.search} component={SearchResults} />
+              <Route exact path={routes.home} component={Nothing} />
+              <Redirect exact from="*" to={routes.home} />
+            </Switch>
+            <BackToTop threshold={BACK_TO_TOP_THRESHOLD} scrollTo={scrollTo} />
+          </main>
+        </ScrollProvider>
+      </ViewportProvider>
     );
   }
 }

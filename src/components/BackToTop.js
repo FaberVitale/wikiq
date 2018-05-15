@@ -3,10 +3,10 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import Zoom from "@material-ui/core/Zoom";
-import { withScrollListener } from "../containers/ScrollListener";
+import { withScroll } from "../containers/Scroll";
 
 type Props = {
-  pageYOffset: number,
+  scrollY: number,
   threshold: number,
   scrollTo: (...args: Array<mixed>) => void
 };
@@ -31,16 +31,16 @@ class BackToTop extends React.Component<Props> {
     this.props.scrollTo(0, 0);
   };
 
-  shouldComponentUpdate({ pageYOffset, threshold, scrollTo }: Props) {
+  shouldComponentUpdate({ scrollY, threshold, scrollTo }: Props) {
     return (
-      BackToTop.isIn(pageYOffset, threshold) !==
-        BackToTop.isIn(this.props.pageYOffset, this.props.threshold) ||
+      BackToTop.isIn(scrollY, threshold) !==
+        BackToTop.isIn(this.props.scrollY, this.props.threshold) ||
       this.props.scrollTo !== scrollTo
     );
   }
 
   render() {
-    const isIn = BackToTop.isIn(this.props.pageYOffset, this.props.threshold);
+    const isIn = BackToTop.isIn(this.props.scrollY, this.props.threshold);
 
     return (
       <Zoom timeout={300} style={BackToTop.style.zoom} in={isIn}>
@@ -62,4 +62,4 @@ class BackToTop extends React.Component<Props> {
 // for testing only
 export const BaseComponent = BackToTop;
 
-export default withScrollListener(BackToTop);
+export default withScroll(BackToTop);

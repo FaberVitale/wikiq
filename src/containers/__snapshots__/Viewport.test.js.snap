@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`src/containers/Scroll withViewport injects defaultViewport values if does not have ViewportProvider as anchestor 1`] = `"{\\"viewportWidth\\":-1,\\"viewportHeight\\":-1}"`;

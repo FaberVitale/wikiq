@@ -1,6 +1,7 @@
 //@flow
 import * as React from "react";
-import { withScrollListener } from "../containers/ScrollListener";
+import { withScroll } from "./Scroll";
+import { withViewport } from "./Viewport";
 import { $html } from "../util/dom";
 import { INFINITE_SCROLL_THRESHOLD } from "../config";
 
@@ -11,13 +12,11 @@ type InfiniteScrollerPassThroughProps = {
   loadMore: () => void,
   isLoadingMore: boolean,
   hasMore: boolean,
-  pageYOffset: number,
-  innerHeight: number
+  scrollY: number,
+  viewportHeight: number
 };
 
 type InfiniteScrollerInternalProps = {
-  subscribed: boolean,
-  toggleSubscription: () => void,
   render: (props: Object) => React.Node
 };
 
@@ -41,8 +40,8 @@ class InfiniteScroller extends React.Component<
       error,
       hasMore,
       isLoadingMore,
-      pageYOffset,
-      innerHeight,
+      scrollY,
+      viewportHeight,
       load
     } = this.props;
 
@@ -56,9 +55,9 @@ class InfiniteScroller extends React.Component<
 
       const isInInfiniteScrollRange =
         scrollHeight > -1 &&
-        pageYOffset + innerHeight > scrollHeight - INFINITE_SCROLL_THRESHOLD;
+        scrollY + viewportHeight > scrollHeight - INFINITE_SCROLL_THRESHOLD;
 
-      const isBodyLargerThanView = scrollHeight > innerHeight;
+      const isBodyLargerThanView = scrollHeight > viewportHeight;
 
       if (isBodyLargerThanView && isInInfiniteScrollRange) {
         this.props.loadMore();
@@ -75,10 +74,10 @@ class InfiniteScroller extends React.Component<
   }
 
   render() {
-    const { render, toggleSubscription, subscribed, ...rest } = this.props;
+    const { render, ...rest } = this.props;
 
     return render(rest);
   }
 }
 
-export default withScrollListener(InfiniteScroller);
+export default withViewport(withScroll(InfiniteScroller));
