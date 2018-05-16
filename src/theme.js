@@ -12,6 +12,10 @@ const breakpoints = {
   }
 };
 
+const typography = {
+  fontSize: 16
+};
+
 /* both themes shares the same contrastText */
 export const contrastText = "#ffffff";
 
@@ -38,7 +42,8 @@ export const light = createMuiTheme({
     secondary: palette2,
     type: "light"
   },
-  breakpoints
+  breakpoints,
+  typography
 });
 
 export const dark = createMuiTheme({
@@ -51,7 +56,8 @@ export const dark = createMuiTheme({
     },
     type: "dark"
   },
-  breakpoints
+  breakpoints,
+  typography
 });
 
 /* properties shared between themes
