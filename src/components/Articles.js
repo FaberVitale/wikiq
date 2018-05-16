@@ -45,11 +45,8 @@ class Articles extends React.Component<Props> {
       transitionDelay: 400
     },
     container: {
-      display: "flex",
       width: "100%",
-      flexFlow: "row wrap",
-      alignItems: "flex-start",
-      justifyContent: "flex-start",
+      padding: 0,
       // firefox complains about exessive memory usage caused by
       // this rule (MUI sets it to opacity)
       // see: https://bugzilla.mozilla.org/show_bug.cgi?id=1457106

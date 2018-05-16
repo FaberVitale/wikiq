@@ -17,35 +17,6 @@ export const warn: (...args: Array<mixed>) => void =
 
 export const nothing: (...args: Array<mixed>) => null = () => null;
 
-/* applies text ellipsis if text.length is higher than the expected length
- * or len (2nd argument) is lower than 0 or len is not a safe integer.
- * For performance reasons it uses text.length instead of taking into account
- * surrogate pairs.
- * 
- * it returns just the ellipsis if len is NaN
- */
-export const ellipsableChar = new Set("\u0020\r\n\t\f\v.,:;"); //\s + punctuation chars
-
-export const applyEllipsis = (len: number, text: string) => {
-  if (text.length <= len || len < 0) {
-    return text;
-  }
-
-  let lastCharIndex = len >>> 0;
-  let char;
-  let times = 10;
-
-  while (lastCharIndex-- && times--) {
-    char = text[lastCharIndex];
-
-    if (ellipsableChar.has(char)) {
-      break;
-    }
-  }
-
-  return text.slice(0, lastCharIndex) + "...";
-};
-
 /* see: https://reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging
  */
 export const getDisplayName = (hocName: string, Comp: any) =>

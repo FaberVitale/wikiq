@@ -92,9 +92,6 @@ const styles = {
     padding: 16,
     //we have to set the width or ie11 wont wrap the flexbox items
     width: "100%",
-    "@media all and (max-width: 700px)": {
-      padding: "16px 4px"
-    },
     [xsDown]: {
       padding: "16px 0"
     }

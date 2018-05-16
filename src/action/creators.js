@@ -26,6 +26,7 @@ import {
 import {
   OPEN_SEARCH_LIMIT,
   PAGINATION_SIZE,
+  THUMBNAIL_WIDTH,
   CARD_SIDE
 } from "../config";
 import { warn } from "../util/functions";
@@ -91,7 +92,7 @@ const fetchSearchAndThumbnails = (
       .slice(0, PAGINATION_SIZE)
       .map(article => article.title);
 
-    const thumbnailURL = getThumbnailURL(lang, titles, CARD_SIDE);
+    const thumbnailURL = getThumbnailURL(lang, titles, THUMBNAIL_WIDTH);
 
     const onThumbnailsReceived = json => {
       if (json && json.query && json.query.pages) {
