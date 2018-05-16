@@ -12,7 +12,6 @@ import { ERROR_MESSAGE, NO_RESULTS, SEARCH_COMPLETED } from "../config";
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
-import { $html } from "../util/dom";
 
 const renderPropArticles = props => {
   const {
@@ -23,7 +22,7 @@ const renderPropArticles = props => {
     lang,
     query,
     loadMore,
-    viewportHeight
+    scrollY
   } = props;
 
   let articles = data;
@@ -59,16 +58,13 @@ const renderPropArticles = props => {
   if (isLoadingMore) {
     bottomPageChild = <CircularProgress size={30} color="secondary" />;
   } else if (hasMore) {
-    const scrollHeight = $html ? $html.scrollHeight : -1;
-
-    const isBodyLargerThanView =
-      scrollHeight > 1 && scrollHeight > viewportHeight;
-
-    bottomPageChild = !isBodyLargerThanView ? (
-      <Button variant="raised" color="secondary" onClick={loadMore}>
-        {"Load More"}
-      </Button>
-    ) : null;
+    // add loadMore button for huge screens
+    bottomPageChild =
+      scrollY <= 0 ? (
+        <Button variant="raised" color="secondary" onClick={loadMore}>
+          {"Load More"}
+        </Button>
+      ) : null;
   } else {
     let msg = articles.length === 0 ? NO_RESULTS : SEARCH_COMPLETED;
 
@@ -92,9 +88,6 @@ const styles = {
     padding: 16,
     //we have to set the width or ie11 wont wrap the flexbox items
     width: "100%",
-    "@media all and (max-width: 700px)": {
-      padding: "16px 4px"
-    },
     [xsDown]: {
       padding: "16px 0"
     }

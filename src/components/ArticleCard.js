@@ -1,78 +1,56 @@
 //@flow
 import React from "react";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
-import { getPDFLink, slugify } from "../util/query";
-import { applyEllipsis } from "../util/functions";
-import {
-  ELLIPSIS_TITLE_THRESHOLD,
-  ELLIPSIS_DESCRIPTION_THRESHOLD,
-  CARD_MARGIN,
-  CARD_SIDE
-} from "../config";
-import { xsDown } from "../theme";
+import { getPDFLink, slugify, getGoogleSearchLink } from "../util/query";
+import { CARD_SIDE, CARD_MARGIN } from "../config";
 import type { WikiArticle } from "../reducers";
-
-const cardSideHalf = CARD_SIDE >>> 1;
+import OverflowFade from "./OverflowFade";
 
 const styles = {
-  //[thumbnail] + text displayed vertically
   card: {
-    width: CARD_SIDE,
     height: CARD_SIDE,
-    overflow: "hidden",
-    flexShrink: 0,
-    margin: `${CARD_MARGIN}px calc(25% - ${cardSideHalf}px)`,
-    [xsDown]: {
-      margin: `${CARD_MARGIN}px calc(50% - ${cardSideHalf}px)`
-    }
+    minWidth: CARD_SIDE,
+    display: "flex",
+    justifyContent: "space-around",
+    marginBottom: CARD_MARGIN
   },
-  //thumbnail + text displayed horizontally
-  cardWithMediaVert: {
-    display: "flex"
-  },
-  textLandscape: {
-    position: "relative"
-  },
-  textNoThumbnail: {
-    position: "relative",
-    height: "100%"
-  },
-  textPortrait: {
-    position: "relative",
-    width: CARD_SIDE - 100
+  content: {
+    flex: 1,
+    height: "100%",
+    padding: 8
   },
   description: {
-    height: 106
+    fontSize: "16px"
   },
   title: {
-    marginBottom: 8
+    marginBottom: CARD_MARGIN >>> 1
   },
   cardActions: {
-    position: "absolute",
-    left: 0,
-    bottom: 8,
+    height: "10%",
     display: "flex",
     flexFlow: "row nowrap",
-    justifyContent: "space-around",
+    justifyContent: "flex-start",
     width: "100%"
   },
   cardMedia: {
-    /* set min dimensions or it will be displayed collapsed
-       * dimensions:
-       * - portrait width: 100, height: CARD_SIDE
-       * - landscape width: CARD_SIDE, height: 100 
-       */
+    minHeight: CARD_SIDE,
     minWidth: 100,
-    minHeight: 100,
+    width: 280,
+    backgroundPosition: "50% 0%",
     backgroundSize: "cover",
     //some thumbnail has trasparency and was meant to be displayed on a white
     //background (wikipedia standard page)
     backgroundColor: "#ffffff"
+  },
+  text: {
+    height: "90%",
+    padding: 16,
+    overflow: "hidden",
+    position: "relative" // required to use OverflowFade correctly
   }
 };
 
@@ -85,16 +63,15 @@ type Props = {
 type State = {
   lang: string,
   title: string,
-  ellipsedTitle: string,
-  ellipsedDescription: string,
-  isThumbnailPortrait: boolean,
+  googleLink: string,
   pdfLink: string
 };
 
 // text of the ext links
 const labels = {
-  page: "View Page",
-  pdf: "View Pdf"
+  page: "Link",
+  pdf: "Pdf",
+  google: "Google"
 };
 
 // Props for Card Actions buttons that open external links in a new tab
@@ -103,26 +80,23 @@ const buttonProps = {
   target: "_blank",
   component: "a",
   color: "secondary",
-  size: "small"
+  size: "small",
+  style: {
+    fontSize: 11
+  }
 };
 
 const getDerivedState: (props: Props) => State = ({ article, lang }) => ({
   lang,
   title: article.info.title,
-  ellipsedTitle: applyEllipsis(ELLIPSIS_TITLE_THRESHOLD, article.info.title),
-  ellipsedDescription: applyEllipsis(
-    ELLIPSIS_DESCRIPTION_THRESHOLD,
-    article.info.description
-  ),
   pdfLink: getPDFLink(lang, slugify(article.info.title)),
-  isThumbnailPortrait:
-    !!article.thumbnail && article.thumbnail.width < article.thumbnail.height
+  googleLink: getGoogleSearchLink(article.info.title)
 });
 
 class ArticleCard extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
+    // cache links generated from props
     this.state = getDerivedState(props);
   }
 
@@ -139,57 +113,31 @@ class ArticleCard extends React.Component<Props, State> {
 
   render() {
     const { article, classes } = this.props;
-
     const { thumbnail, info } = article;
-
-    const {
-      ellipsedDescription,
-      ellipsedTitle,
-      isThumbnailPortrait,
-      pdfLink
-    } = this.state;
+    const { pdfLink, googleLink } = this.state;
 
     return (
-      <Card
-        className={
-          isThumbnailPortrait
-            ? `${classes.card} ${classes.cardWithMediaVert}`
-            : classes.card
-        }
-        component="section"
-      >
-        {thumbnail && (
-          <CardMedia
-            className={classes.cardMedia}
-            title={info.title}
-            image={thumbnail.source}
-          />
-        )}
-        <CardContent
-          className={
-            isThumbnailPortrait
-              ? classes.textPortrait
-              : thumbnail
-                ? classes.textLandscape
-                : classes.textNoThumbnail
-          }
-        >
-          <Typography
-            variant="title"
-            color="secondary"
-            className={classes.title}
-            component="h3"
-          >
-            {ellipsedTitle}
-          </Typography>
-          <Typography
-            className={classes.description}
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            {ellipsedDescription}
-          </Typography>
+      <Card className={classes.card} component="section">
+        <div className={classes.content}>
+          <div className={classes.text}>
+            <OverflowFade />
+            <Typography
+              variant="title"
+              color="secondary"
+              className={classes.title}
+              component="h3"
+            >
+              {article.info.title}
+            </Typography>
+            <Typography
+              className={classes.description}
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+              {article.info.description}
+            </Typography>
+          </div>
           <div className={classes.cardActions}>
             <Button {...buttonProps} className={classes.link} href={info.link}>
               {labels.page}
@@ -197,8 +145,18 @@ class ArticleCard extends React.Component<Props, State> {
             <Button {...buttonProps} color="secondary" href={pdfLink}>
               {labels.pdf}
             </Button>
+            <Button {...buttonProps} color="secondary" href={googleLink}>
+              {labels.google}
+            </Button>
           </div>
-        </CardContent>
+        </div>
+        {thumbnail && (
+          <CardMedia
+            className={classes.cardMedia}
+            image={thumbnail.source}
+            title={article.info.title}
+          />
+        )}
       </Card>
     );
   }

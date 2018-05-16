@@ -1,7 +1,6 @@
 import React from "react";
 import { BaseComponent, default as InfiniteScroller } from "./InfiniteScroller";
 import { shallow } from "enzyme";
-import { INFINITE_SCROLL_THRESHOLD } from "../config";
 import ReactDOM from "react-dom";
 
 describe("src/container/InfiniteScroller", () => {
@@ -18,7 +17,7 @@ describe("src/container/InfiniteScroller", () => {
     isLoadingMore: false,
     hasMore: false,
     scrollY: 0,
-    viewportHeight: INFINITE_SCROLL_THRESHOLD,
+    viewportHeight: 1080,
     render: logProps
   };
 

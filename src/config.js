@@ -12,6 +12,7 @@ export const LOCALES = [
   "sv",
   "nl",
   "pl",
+  "ja",
   "ceb",
   "vi",
   "war"
@@ -28,6 +29,7 @@ export const LOCALES_TO_LANGUAGE = {
   nl: "Dutch",
   sv: "Swedish",
   pl: "Polish",
+  ja: "Japanese",
   ceb: "Cebuano",
   war: "Waray-Waray",
   vi: "Vietnamese"
@@ -43,10 +45,10 @@ export const routes = {
 export const REACT_ROOT_ID = "root";
 
 //max len of description allowed, applies ellipsis if longer
-export const ELLIPSIS_DESCRIPTION_THRESHOLD = 100;
+export const ELLIPSIS_DESCRIPTION_THRESHOLD = 300;
 
 //max len of title allowed, applies ellipisis if longer
-export const ELLIPSIS_TITLE_THRESHOLD = 20;
+export const ELLIPSIS_TITLE_THRESHOLD = 50;
 
 // max number of results of an open Search query (max allowed is 500)
 // see: https://www.mediawiki.org/wiki/API:Opensearch
@@ -64,6 +66,9 @@ export const CARD_SIDE = 280;
 /* margin top and margin-bottom of card */
 export const CARD_MARGIN = 16;
 
+/* width of the thunbail displayed */
+export const THUMBNAIL_WIDTH = 300;
+
 // displayed when the app fails to load Main or a query
 export const ERROR_MESSAGE =
   "An Error has occurred, check your connection then refresh";
@@ -76,10 +81,6 @@ export const NO_RESULTS = "0 results found";
 
 // throttle time span used by ScrollListener
 export const SCROLL_LISTENER_THROTTLE = 200;
-
-// min difference that doesnt trigger a request to load more articles
-// it should at least as big as the height of BottomNavigation
-export const INFINITE_SCROLL_THRESHOLD = 700;
 
 // if window has scrolled more than threshold Back to Top button will be visible
 // it should be a number between [0; 2^31 -1]

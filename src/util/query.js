@@ -7,6 +7,9 @@ export const slugify = (val: string) =>
 export const deslugify = (val: string) =>
   decodeURIComponent(val).replace(/_/g, "\u0020");
 
+export const encodeComponent = (val: string) =>
+  encodeURIComponent(val).replace(/%20/g, "+");
+
 export const getOpenSearchURL = (
   lang: string,
   query: string,
@@ -30,6 +33,9 @@ export const makeSearchId = (lang: string, query: string) =>
 /* Given a locale and a title slug returns the link to the pdf of the article*/
 export const getPDFLink = (lang: string, title: string) =>
   `https://${lang}.wikipedia.org/api/rest_v1/page/pdf/${title}`;
+
+export const getGoogleSearchLink = (query: string) =>
+  `https://google.com/search?q=${encodeComponent(query.toLowerCase())}`;
 
 export const fetchJSON: (
   input: RequestInfo,

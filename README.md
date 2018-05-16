@@ -12,7 +12,7 @@ link: https://wikiq.netlify.com/
 
 ## Description
 
-A progressive web app that allows to quickly search Wikipedia articles of 13 
+A progressive web app that allows to quickly search Wikipedia articles of 14
 different languages.
 
 ### Features
