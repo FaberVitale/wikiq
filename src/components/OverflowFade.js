@@ -21,7 +21,7 @@ const style = theme => ({
   }
 });
 
-class OverflowFade extends React.Component {
+class OverflowFade extends React.Component<{}> {
   render() {
     const { classes, ...rest } = this.props;
     return <div className={classes.overlay} {...rest} aria-hidden="true" />;
