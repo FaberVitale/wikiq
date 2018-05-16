@@ -9,7 +9,6 @@ import { nothing as Nothing } from "../util/functions";
 import { scrollTo } from "../util/dom";
 import { ScrollProvider } from "./Scroll";
 import { ViewportProvider } from "./Viewport";
-import { shadows } from "../theme";
 
 const styles = {
   main: {
@@ -17,17 +16,10 @@ const styles = {
     flexFlow: "column nowrap",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    minHeight: "calc(100vh - 96px)",
+    margin: "0 auto",
+    padding: 16,
     "@media all and (min-width: 1064px)": {
-      width: 1000,
-      boxShadow: shadows[3],
-      margin: "16px auto"
-    },
-    "@media all and (max-width: 1063px)": {
-      boxShadow: "none",
-      width: "100%",
-      padding: "16px 8px",
-      margin: "16px 0"
+      width: 1000
     }
   }
 };
