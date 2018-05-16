@@ -82,10 +82,6 @@ export const NO_RESULTS = "0 results found";
 // throttle time span used by ScrollListener
 export const SCROLL_LISTENER_THROTTLE = 200;
 
-// min difference that doesnt trigger a request to load more articles
-// it should at least as big as the height of BottomNavigation
-export const INFINITE_SCROLL_THRESHOLD = 1000;
-
 // if window has scrolled more than threshold Back to Top button will be visible
 // it should be a number between [0; 2^31 -1]
 export const BACK_TO_TOP_THRESHOLD = 300;

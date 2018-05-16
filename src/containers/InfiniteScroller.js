@@ -2,10 +2,12 @@
 import * as React from "react";
 import { withScroll } from "./Scroll";
 import { withViewport } from "./Viewport";
-import { $html } from "../util/dom";
-import { INFINITE_SCROLL_THRESHOLD } from "../config";
+import { CARD_SIDE, CARD_MARGIN } from "../config";
+
+const itemHeight = CARD_MARGIN + CARD_SIDE;
 
 type InfiniteScrollerPassThroughProps = {
+  itemHeight: number,
   data: ?Array<*>,
   error: mixed,
   load: () => void,
@@ -28,8 +30,8 @@ type InfiniteScrollerInternalProps = {
  *  - if error == null && data == null invokes load
  * 
  *  - if data has been fetched and !isLoadingMore and hasMore
- *    and if the section of the page below the viewport is lower than 
- *    INFINITE_SCROLL_THRESHOLD, invokes loadMore
+ *    and if viewportHeight + the amount scrolled is >= 80% of the overall height
+ *    of the items, call loadMore
  */
 class InfiniteScroller extends React.Component<
   InfiniteScrollerInternalProps & InfiniteScrollerPassThroughProps
@@ -51,16 +53,12 @@ class InfiniteScroller extends React.Component<
 
     if (shouldLoadSearch) {
       load();
-    } else if (isAllowedToLoadMore) {
-      const scrollHeight = $html ? $html.scrollHeight : -1;
+    } else if (data && isAllowedToLoadMore) {
+      const hasScrolledEnough =
+        scrollY > 0 &&
+        scrollY + viewportHeight >= data.length * 0.8 * itemHeight;
 
-      const isInInfiniteScrollRange =
-        scrollHeight > -1 &&
-        scrollY + viewportHeight > scrollHeight - INFINITE_SCROLL_THRESHOLD;
-
-      const isBodyLargerThanView = scrollHeight > viewportHeight;
-
-      if (isBodyLargerThanView && isInInfiniteScrollRange) {
+      if (hasScrolledEnough) {
         loadMore();
       }
     }
