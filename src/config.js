@@ -83,7 +83,6 @@ export const NO_RESULTS = "0 results found";
 export const SCROLL_LISTENER_THROTTLE = 200;
 
 // if window has scrolled more than threshold Back to Top button will be visible
-// it should be a number between [0; 2^31 -1]
 export const BACK_TO_TOP_THRESHOLD = 300;
 
 //throttle timespan of change theme
