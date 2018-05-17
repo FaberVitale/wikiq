@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `"/en/asg12AR%23%40~%60+%2F%5C%2B()_%3A.%2C%3F'%5E%F0%9F%92%A9%7C%26%22"`;
+
 exports[`src/util/query getGoogleSearchLink 1`] = `"https://google.com/search?q=trip"`;
 
 exports[`src/util/query getGoogleSearchLink 2`] = `"https://google.com/search?q=asg12ar%23%40~%60+%2F%5C%2B()_%3A.%2C%3F'%5E%F0%9F%92%A9%7C%26%22"`;
@@ -15,3 +17,5 @@ exports[`src/util/query getPDFLink 2`] = `"https://en.wikipedia.org/api/rest_v1/
 exports[`src/util/query getThumbnailURL 1`] = `"https://en.wikipedia.org/w/api.php?action=query&titles=as|rem|tik|tak&prop=pageimages&format=json&origin=*&pithumbsize=100"`;
 
 exports[`src/util/query getThumbnailURL 2`] = `"https://en.wikipedia.org/w/api.php?action=query&titles=as|rem|tik|tak&prop=pageimages&format=json&origin=*&pithumbsize=300"`;
+
+exports[`src/util/query makeArticleId 1`] = `"en/asg12AR%23%40~%60+%2F%5C%2B()_%3A.%2C%3F'%5E%F0%9F%92%A9%7C%26%22"`;

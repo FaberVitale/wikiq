@@ -72,7 +72,8 @@ const makeArticleInfo: (
   link
 });
 
-const makeArticleId = (lang: string, title: string) => `${lang}/${title}`;
+export const makeArticleId = (lang: string, title: string) =>
+  `${lang}/${encodeComponent(title)}`;
 
 export const transformSearch: (
   lang: string,

@@ -7,6 +7,17 @@ describe("src/util/query", () => {
   const spaceSequence = "\u0020\u0020\u0020";
   const testString = "asg12AR#@~`\u0020/\\+()_:.,?'^💩|&\"";
 
+  test("makeArticleId", () => {
+    expect(
+      ids.every(id => id === fn.makeArticleId(lang, articles[id].title))
+    ).toBe(true);
+    expect(fn.makeArticleId(lang, testString)).toMatchSnapshot();
+  });
+
+  describe("makeSearchId", () => {
+    expect(fn.makeSearchId(lang, testString)).toMatchSnapshot();
+  });
+
   test("encodeComponent", () => {
     expect(fn.encodeComponent(spaceSequence)).toBe(plus3);
     expect(
