@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import { mapProps } from "recompose";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { deslugify } from "../util/query";
+import { decodeComponent } from "../util/query";
 import ArticlesContainer from "../containers/Articles";
 import Articles from "./Articles";
 import { LOCALES_TO_LANGUAGE } from "../config";
@@ -104,7 +104,7 @@ const styles = {
 /* extracts relevant props and removes other Route props */
 const filterProps = mapProps(({ match, classes }) => ({
   lang: match.params.lang,
-  query: deslugify(match.params.query),
+  query: decodeComponent(match.params.query),
   classes
 }));
 

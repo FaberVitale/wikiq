@@ -12,7 +12,7 @@ import type { ChangeThemeAction, Dispatch, ThunkAction } from "./types";
 import {
   makeSearchId,
   getOpenSearchURL,
-  slugify,
+  encodeComponent,
   fetchJSON,
   transformSearch,
   getThumbnailURL,
@@ -122,7 +122,7 @@ export const requestSearch: (lang: string, query: string) => ThunkAction = (
   lang,
   query
 ) => {
-  const escapedQuery = slugify(query);
+  const escapedQuery = encodeComponent(query);
 
   const searchId = makeSearchId(lang, query);
 

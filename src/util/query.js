@@ -1,14 +1,22 @@
 //@flow
 import type { WikiArticleInfo } from "../reducers";
 
+// cache reference to the native methods
+const baseEncodeURIComponent = encodeURIComponent;
+
+const baseDecodeURIComponent = decodeURIComponent;
+
 export const slugify = (val: string) =>
-  encodeURIComponent(val).replace(/%20/g, "_");
+  baseEncodeURIComponent(val).replace(/%20/g, "_");
 
 export const deslugify = (val: string) =>
-  decodeURIComponent(val).replace(/_/g, "\u0020");
+  baseDecodeURIComponent(val.replace(/_/g, "\u0020"));
 
 export const encodeComponent = (val: string) =>
-  encodeURIComponent(val).replace(/%20/g, "+");
+  baseEncodeURIComponent(val).replace(/%20/g, "+");
+
+export const decodeComponent = (val: string) =>
+  baseDecodeURIComponent(val.replace(/\+/g, "%20"));
 
 export const getOpenSearchURL = (
   lang: string,
@@ -28,7 +36,7 @@ export const getThumbnailURL = (
 };
 
 export const makeSearchId = (lang: string, query: string) =>
-  `/${lang}/${slugify(query)}`;
+  `/${lang}/${encodeComponent(query)}`;
 
 /* Given a locale and a title slug returns the link to the pdf of the article*/
 export const getPDFLink = (lang: string, title: string) =>
