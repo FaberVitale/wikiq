@@ -51,6 +51,11 @@ describe("src/util/query", () => {
     expect(fn.getPDFLink(lang, "sting")).toMatchSnapshot();
   });
 
+  test("getGoogleSearchLink", () => {
+    expect(fn.getGoogleSearchLink("trip")).toMatchSnapshot();
+    expect(fn.getGoogleSearchLink(testString)).toMatchSnapshot();
+  });
+
   test("transformSearch", () => {
     expect(fn.transformSearch(lang, openSearch)).toEqual({
       ids,
