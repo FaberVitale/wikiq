@@ -112,11 +112,18 @@ const fetchSearchAndThumbnails = (
       .then(onThumbnailsReceived, warn)
       .then(finallyDispatch);
   };
+  const cb = () => {
+    fetchJSON(searchURL).then(onSearchReceived, onSearchNotReceived);
+  };
 
-  fetchJSON(searchURL).then(onSearchReceived, onSearchNotReceived);
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    window.requestIdleCallback(cb);
+  } else {
+    setTimeout(cb, 200);
+  }
 };
 
-/* action creator that dispatchs a thunk that will fetch Search and thumbnails 
+/* action creator that dispatches a thunk that will fetch Search and thumbnails 
  * if necessary */
 export const requestSearch: (lang: string, query: string) => ThunkAction = (
   lang,
@@ -134,6 +141,43 @@ export const requestSearch: (lang: string, query: string) => ThunkAction = (
     dispatch(fetchSearch(searchId));
 
     fetchSearchAndThumbnails(lang, escapedQuery, searchId, dispatch);
+  };
+};
+
+/* action creator that schedules a fetch of more thumbnails
+ * if it is possible/allowed 
+ */
+export const requestMoreThumbnails = (lang: string, searchId: string) => {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    if (isFetchingThumbnails(state, searchId)) {
+      return;
+    }
+
+    if (!hasMoreThumbnails(state, searchId)) {
+      warn(
+        `Attempted to load more thumbnails than possible, searchId: ${searchId}`
+      );
+      return;
+    }
+
+    /* notify that we are fetching, in order to not load the same resource
+     * more than once at the same time
+     */
+    dispatch(fetchThumbnails(searchId));
+
+    const cb = () => dispatch(loadMoreThumbnails(lang, searchId));
+    const timeout = 300;
+
+    /* schedule a dispatch of a thunk that will load the thumbnails
+     * using requestIdleCallback if possible
+     */
+    if (typeof window !== undefined && "requestIdleCallback" in window) {
+      window.requestIdleCallback(cb, { timeout });
+    } else {
+      setTimeout(cb, timeout);
+    }
   };
 };
 
@@ -164,25 +208,15 @@ const onLoadMoreThumbnailsFail = (
   dispatch(failedToFetchThumbnails(searchId));
 };
 
-/* action creator that dispatches a thunk 
- * that will load thumbnails if necessary */
-export const loadMoreThumbnails: (
-  lang: string,
-  searchId: string
-) => ThunkAction = (lang, searchId) => {
+/* thunk that fetches thumbnails, it shouldnt be called directly,
+ * call requestMoreThumbnails instead
+ */
+const loadMoreThumbnails: (lang: string, searchId: string) => ThunkAction = (
+  lang,
+  searchId
+) => {
   return (dispatch, getState) => {
     const state = getState();
-
-    if (isFetchingThumbnails(state, searchId)) {
-      return;
-    }
-
-    if (!hasMoreThumbnails(state, searchId)) {
-      warn(
-        `Attempted to load more thumbnails than possible, searchId: ${searchId}`
-      );
-      return;
-    }
 
     const { thumbnails, ids } = state.searches[searchId];
     const onFulFill = onLoadMoreThumbnailsSuccess(dispatch, lang, searchId);
@@ -199,10 +233,6 @@ export const loadMoreThumbnails: (
 
     const thumbnailURL = getThumbnailURL(lang, titles, CARD_SIDE);
 
-    // notify that we are fetching
-    dispatch(fetchThumbnails(searchId));
-
-    // then fetch
     fetchJSON(thumbnailURL).then(onFulFill, onRejection);
   };
 };

@@ -7,7 +7,7 @@ import {
   isFetchingThumbnails
 } from "../selectors";
 import { makeSearchId } from "../util/query";
-import { requestSearch, loadMoreThumbnails } from "../action/creators";
+import { requestSearch, requestMoreThumbnails } from "../action/creators";
 import InfiniteScroller from "./InfiniteScroller";
 import type { State } from "../reducers";
 import type { Dispatch } from "../action/types";
@@ -40,7 +40,8 @@ const mapDispatchToProps = (
   { lang, query }: ConnectProps
 ) => ({
   load: () => dispatch(requestSearch(lang, query)),
-  loadMore: () => dispatch(loadMoreThumbnails(lang, makeSearchId(lang, query)))
+  loadMore: () =>
+    dispatch(requestMoreThumbnails(lang, makeSearchId(lang, query)))
 });
 
 const connectOptions = {
