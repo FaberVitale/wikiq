@@ -147,7 +147,10 @@ export const requestSearch: (lang: string, query: string) => ThunkAction = (
 /* action creator that schedules a fetch of more thumbnails
  * if it is possible/allowed 
  */
-export const requestMoreThumbnails = (lang: string, searchId: string) => {
+export const requestMoreThumbnails: (
+  lang: string,
+  searchId: string
+) => ThunkAction = (lang, searchId) => {
   return (dispatch, getState) => {
     const state = getState();
 
