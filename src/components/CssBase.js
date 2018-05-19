@@ -10,6 +10,10 @@ type Props = {||};
  */
 const styles = theme => ({
   "@global": {
+    "@keyframes fadeIn": {
+      from: { opacity: 0 },
+      to: { opacity: 1 }
+    },
     html: {
       // Antialiasing.
       WebkitFontSmoothing: "antialiased",

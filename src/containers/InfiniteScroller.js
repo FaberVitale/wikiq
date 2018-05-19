@@ -2,9 +2,6 @@
 import * as React from "react";
 import { withScroll } from "./Scroll";
 import { withViewport } from "./Viewport";
-import { CARD_SIDE, CARD_MARGIN } from "../config";
-
-const itemHeight = CARD_MARGIN + CARD_SIDE;
 
 type InfiniteScrollerPassThroughProps = {
   itemHeight: number,
@@ -44,6 +41,7 @@ class InfiniteScroller extends React.Component<
       isLoadingMore,
       scrollY,
       viewportHeight,
+      itemHeight,
       load,
       loadMore
     } = this.props;

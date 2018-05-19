@@ -52,7 +52,7 @@ export const ELLIPSIS_TITLE_THRESHOLD = 50;
 
 // max number of results of an open Search query (max allowed is 500)
 // see: https://www.mediawiki.org/wiki/API:Opensearch
-export const OPEN_SEARCH_LIMIT = 80;
+export const OPEN_SEARCH_LIMIT = 480;
 
 // wikipedia supports up to 10 titles in a query action
 export const PAGINATION_SIZE = 10;
@@ -67,7 +67,7 @@ export const CARD_SIDE = 280;
 export const CARD_MARGIN = 16;
 
 /* width of the thunbail displayed */
-export const THUMBNAIL_WIDTH = 300;
+export const THUMBNAIL_WIDTH = 280;
 
 // displayed when the app fails to load Main or a query
 export const ERROR_MESSAGE =
@@ -83,7 +83,6 @@ export const NO_RESULTS = "0 results found";
 export const SCROLL_LISTENER_THROTTLE = 200;
 
 // if window has scrolled more than threshold Back to Top button will be visible
-// it should be a number between [0; 2^31 -1]
 export const BACK_TO_TOP_THRESHOLD = 300;
 
 //throttle timespan of change theme

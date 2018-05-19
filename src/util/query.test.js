@@ -3,6 +3,49 @@ import { openSearch, thumbnails } from "../__mocks__/api";
 import { ids, articles, lang, query } from "../__mocks__/reducers";
 
 describe("src/util/query", () => {
+  const plus3 = "+++";
+  const spaceSequence = "\u0020\u0020\u0020";
+  const testString = "asg12AR#@~`\u0020/\\+()_:.,?'^💩|&\"";
+
+  test("makeArticleId", () => {
+    expect(
+      ids.every(id => id === fn.makeArticleId(lang, articles[id].title))
+    ).toBe(true);
+    expect(fn.makeArticleId(lang, testString)).toMatchSnapshot();
+  });
+
+  describe("makeSearchId", () => {
+    expect(fn.makeSearchId(lang, testString)).toMatchSnapshot();
+  });
+
+  test("encodeComponent", () => {
+    expect(fn.encodeComponent(spaceSequence)).toBe(plus3);
+    expect(
+      decodeURIComponent(fn.encodeComponent(testString).replace(/\+/g, "%20"))
+    ).toBe(testString);
+  });
+
+  test("decodeComponent", () => {
+    expect(fn.decodeComponent(plus3)).toBe(spaceSequence);
+    expect(
+      fn.decodeComponent(encodeURIComponent(testString).replace(/%20/g, "%20"))
+    ).toBe(testString);
+  });
+
+  test("slugify", () => {
+    expect(fn.slugify(spaceSequence)).toBe("___");
+    expect(
+      decodeURIComponent(fn.slugify(testString).replace(/_/g, "%20"))
+    ).toBe(testString.replace(/_/g, "\u0020"));
+  });
+
+  test("deslugify", () => {
+    expect(fn.deslugify("___")).toBe(spaceSequence);
+    expect(
+      fn.deslugify(encodeURIComponent(testString).replace(/%20/g, "_"))
+    ).toBe(testString.replace(/_/g, "\u0020"));
+  });
+
   test("getOpenSearchURL", () => {
     expect(fn.getOpenSearchURL(lang, query)).toMatchSnapshot();
     expect(fn.getOpenSearchURL(lang, query, 30)).toMatchSnapshot();
@@ -17,6 +60,11 @@ describe("src/util/query", () => {
   test("getPDFLink", () => {
     expect(fn.getPDFLink(lang, "stan")).toMatchSnapshot();
     expect(fn.getPDFLink(lang, "sting")).toMatchSnapshot();
+  });
+
+  test("getGoogleSearchLink", () => {
+    expect(fn.getGoogleSearchLink("trip")).toMatchSnapshot();
+    expect(fn.getGoogleSearchLink(testString)).toMatchSnapshot();
   });
 
   test("transformSearch", () => {

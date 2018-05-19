@@ -3,15 +3,23 @@ import React, { Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import { mapProps } from "recompose";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { deslugify } from "../util/query";
+import { decodeComponent } from "../util/query";
 import ArticlesContainer from "../containers/Articles";
 import Articles from "./Articles";
 import { LOCALES_TO_LANGUAGE } from "../config";
 import { xsDown } from "../theme";
-import { ERROR_MESSAGE, NO_RESULTS, SEARCH_COMPLETED } from "../config";
+import {
+  ERROR_MESSAGE,
+  NO_RESULTS,
+  SEARCH_COMPLETED,
+  CARD_MARGIN,
+  CARD_SIDE
+} from "../config";
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
+
+const itemHeight = CARD_MARGIN + CARD_SIDE;
 
 const renderPropArticles = props => {
   const {
@@ -22,7 +30,8 @@ const renderPropArticles = props => {
     lang,
     query,
     loadMore,
-    scrollY
+    scrollY,
+    viewportHeight
   } = props;
 
   let articles = data;
@@ -77,7 +86,14 @@ const renderPropArticles = props => {
 
   return (
     <Fragment>
-      <Articles lang={lang} query={query} articles={articles} />
+      <Articles
+        lang={lang}
+        query={query}
+        articles={articles}
+        itemHeight={itemHeight}
+        scrollY={scrollY}
+        viewportHeight={viewportHeight}
+      />
       <BottomPage>{bottomPageChild}</BottomPage>
     </Fragment>
   );
@@ -104,7 +120,7 @@ const styles = {
 /* extracts relevant props and removes other Route props */
 const filterProps = mapProps(({ match, classes }) => ({
   lang: match.params.lang,
-  query: deslugify(match.params.query),
+  query: decodeComponent(match.params.query),
   classes
 }));
 
@@ -142,6 +158,7 @@ class SearchResults extends React.Component<Props> {
           lang={lang}
           query={query}
           render={renderPropArticles}
+          itemHeight={itemHeight}
         />
       </article>
     );
