@@ -52,7 +52,7 @@ export const ELLIPSIS_TITLE_THRESHOLD = 50;
 
 // max number of results of an open Search query (max allowed is 500)
 // see: https://www.mediawiki.org/wiki/API:Opensearch
-export const OPEN_SEARCH_LIMIT = 80;
+export const OPEN_SEARCH_LIMIT = 480;
 
 // wikipedia supports up to 10 titles in a query action
 export const PAGINATION_SIZE = 10;
