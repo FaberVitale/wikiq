@@ -67,7 +67,7 @@ export const CARD_SIDE = 280;
 export const CARD_MARGIN = 16;
 
 /* width of the thunbail displayed */
-export const THUMBNAIL_WIDTH = 300;
+export const THUMBNAIL_WIDTH = 280;
 
 // displayed when the app fails to load Main or a query
 export const ERROR_MESSAGE =
