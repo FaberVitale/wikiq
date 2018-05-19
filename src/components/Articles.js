@@ -1,102 +1,97 @@
 //@flow
 import React from "react";
-import ArticleCard from "./ArticleCard";
-import { PAGINATION_SIZE } from "../config";
-import Fade from "@material-ui/core/Fade";
+import ArticleCard, { classes } from "./ArticleCard";
 import type { WikiArticle } from "../reducers";
 
 type Props = {
   articles: Array<WikiArticle>,
   lang: string,
-  query: string
+  query: string,
+  itemHeight: number,
+  scrollY: number,
+  classes: MUIClasses,
+  viewportHeight: number
 };
 
-/* it renders PAGINATION_SIZE or less ArticleCard components 
- * it exists as a way to prevent re-renders of ArticlesCards
- * already mounted when props.articles changes.
- */
-class ArticleGroup extends React.Component<
-  Props & { from: number, to: number }
-> {
-  /* prevent components updates if lang or query do not change. */
-  shouldComponentUpdate({ lang, query }: Props) {
-    return this.props.lang !== lang || this.props.query !== query;
-  }
-
-  render() {
-    const { from, to, articles, lang } = this.props;
-    const cards = [];
-
-    for (let i = from; i < to; i++) {
-      const article = articles[i];
-
-      cards.push(
-        <ArticleCard key={article.info.title} lang={lang} article={article} />
-      );
-    }
-
-    return cards;
-  }
-}
-
 class Articles extends React.Component<Props> {
-  static styles = {
-    transition: {
-      transitionDelay: 400
-    },
-    container: {
-      width: "100%",
-      padding: 0,
-      // firefox complains about exessive memory usage caused by
-      // this rule (MUI sets it to opacity)
-      // see: https://bugzilla.mozilla.org/show_bug.cgi?id=1457106
-      // and https://developer.mozilla.org/en-US/docs/Web/CSS/will-change
-      // according to the above article "will-change" set to opacity
-      // implies that this element is going to change opacity often
-      // which isnt the case in this situation,
-      // because it transitions (fades in) once
-      // during its lifecycle.
-      willChange: "auto"
-    }
-  };
+  shouldComponentUpdate({
+    viewportHeight,
+    scrollY,
+    lang,
+    query,
+    articles,
+    classes
+  }: Props) {
+    const hasQueryChanged =
+      this.props.lang !== lang || this.props.query !== query;
 
-  shouldComponentUpdate({ articles, lang, query }: Props) {
+    const hasMoreItems = this.props.articles.length !== articles.length;
+
+    const deltaScrollY = scrollY - this.props.scrollY;
+
+    const deltaViewportHeight = viewportHeight - this.props.viewportHeight;
+
+    const hasStyleChanged = classes.card !== this.props.classes.card;
+
     return (
-      this.props.articles.length !== articles.length ||
-      this.props.lang !== lang ||
-      query !== this.props.query
+      hasQueryChanged ||
+      hasMoreItems ||
+      hasStyleChanged ||
+      deltaViewportHeight !== 0 ||
+      deltaScrollY !== 0
     );
   }
 
-  render() {
-    const groups = [];
+  static makeList = (from: number, to: number, props: Props) => {
+    let list = [];
 
-    for (
-      let i = 0, len = this.props.articles.length;
-      i < len;
-      i += PAGINATION_SIZE
-    ) {
-      let to = i + PAGINATION_SIZE;
+    const { articles, lang } = props;
 
-      //creates a new component and unmounts the prev one if lang or query changes
-      const key = `${this.props.lang}-${this.props.query}-${i}`;
+    for (let i = from; i < to; i++) {
+      let article = articles[i];
 
-      groups.push(
-        <ArticleGroup
-          {...this.props}
-          key={key}
-          from={i}
-          to={to > len ? len : to}
+      list.push(
+        <ArticleCard
+          article={article}
+          classes={props.classes}
+          lang={lang}
+          key={article.info.title}
         />
       );
     }
 
+    return list;
+  };
+
+  render() {
+    const { articles, viewportHeight, scrollY } = this.props;
+    const itemHeight = 296;
+    const len = articles.length;
+    const buffer = 4;
+
+    const from = Math.max(0, Math.floor(scrollY / itemHeight) - buffer);
+    const to = Math.min(
+      len,
+      Math.ceil((viewportHeight + scrollY) / itemHeight + buffer)
+    );
+
+    const containerStyle = {
+      height: len * itemHeight
+    };
+
+    const contentStyle = {
+      willChange: "transform",
+      transform: `translateY(${from * itemHeight}px)`
+    };
+
     return (
-      <Fade timeout={400} in={true} style={Articles.styles.transition}>
-        <div style={Articles.styles.container}>{groups}</div>
-      </Fade>
+      <div style={containerStyle}>
+        <div style={contentStyle}>
+          {Articles.makeList(from, to, this.props)}
+        </div>
+      </div>
     );
   }
 }
 
-export default Articles;
+export default classes(Articles);

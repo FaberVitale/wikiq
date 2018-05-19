@@ -1,13 +1,14 @@
-import ArticleCard from "./ArticleCard";
+import ArticleCard, { classes } from "./ArticleCard";
 import { createMount } from "@material-ui/core/test-utils";
 import { articles, thumbnails, ids, lang } from "../__mocks__/reducers";
 import React from "react";
 
 describe("src/components/ArticleCard", () => {
-  let mount;
+  let mount, Component;
 
   beforeAll(() => {
     mount = createMount();
+    Component = classes(ArticleCard);
   });
 
   afterAll(() => {
@@ -23,7 +24,7 @@ describe("src/components/ArticleCard", () => {
     mount(
       <div>
         {props.map((id, index) => (
-          <ArticleCard lang={lang} article={props[index]} key={ids[index]} />
+          <Component lang={lang} article={props[index]} key={ids[index]} />
         ))}
       </div>
     );

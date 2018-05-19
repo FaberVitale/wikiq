@@ -1,22 +1,28 @@
 //@flow
 import React from "react";
-import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import { getPDFLink, slugify, getGoogleSearchLink } from "../util/query";
 import { CARD_SIDE, CARD_MARGIN } from "../config";
 import type { WikiArticle } from "../reducers";
 import OverflowFade from "./OverflowFade";
+import ExtLink from "./ExtLink";
 
-const styles = {
+/* optimization: instad of calling withStyles N times HOC,
+ *  we export it in order to inject props.classes through
+ * the Component that renders ArticleCard */
+export const classes = withStyles(theme => ({
   card: {
     height: CARD_SIDE,
     minWidth: CARD_SIDE,
     display: "flex",
     justifyContent: "space-around",
-    marginBottom: CARD_MARGIN
+    marginBottom: CARD_MARGIN,
+    overflow: "hidden",
+    background: theme.palette.background.paper,
+    boxShadow: theme.shadows[2],
+    borderRadius: 2
   },
   content: {
     flex: 1,
@@ -34,7 +40,9 @@ const styles = {
     display: "flex",
     flexFlow: "row nowrap",
     justifyContent: "flex-start",
-    width: "100%"
+    alignItems: "center",
+    width: "100%",
+    padding: "0 16px"
   },
   cardMedia: {
     minHeight: CARD_SIDE,
@@ -44,15 +52,34 @@ const styles = {
     backgroundSize: "cover",
     //some thumbnail has trasparency and was meant to be displayed on a white
     //background (wikipedia standard page)
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    transform: "translate3d(0, 0, 0)",
+    animationName: "fadeIn",
+    animationFillMode: "both",
+    animationDelay: 400,
+    animationDuration: 400
   },
   text: {
     height: "90%",
     padding: 16,
     overflow: "hidden",
     position: "relative" // required to use OverflowFade correctly
+  },
+  link: {
+    display: "inline-block",
+    padding: "4px",
+    borderRadius: 4,
+    color: theme.palette.secondary.main,
+    fontWeight: "bold",
+    textDecoration: "none",
+    fontSize: 14,
+    outline: "none",
+    "&:focus": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.background.paper
+    }
   }
-};
+}));
 
 type Props = {
   lang: string,
@@ -72,18 +99,6 @@ const labels = {
   page: "Link",
   pdf: "Pdf",
   google: "Google"
-};
-
-// Props for Card Actions buttons that open external links in a new tab
-const buttonProps = {
-  rel: "noreferrer noopener",
-  target: "_blank",
-  component: "a",
-  color: "secondary",
-  size: "small",
-  style: {
-    fontSize: 11
-  }
 };
 
 const getDerivedState: (props: Props) => State = ({ article, lang }) => ({
@@ -111,13 +126,22 @@ class ArticleCard extends React.Component<Props, State> {
     return null;
   }
 
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    const hasStyleChanged = nextProps.classes.card !== this.props.classes.card;
+
+    const hasQueryChanged =
+      nextProps.article.info.title !== this.props.article.info.title;
+
+    return hasStyleChanged || hasQueryChanged;
+  }
+
   render() {
     const { article, classes } = this.props;
     const { thumbnail, info } = article;
     const { pdfLink, googleLink } = this.state;
 
     return (
-      <Card className={classes.card} component="section">
+      <section className={classes.card}>
         <div className={classes.content}>
           <div className={classes.text}>
             <OverflowFade />
@@ -139,15 +163,21 @@ class ArticleCard extends React.Component<Props, State> {
             </Typography>
           </div>
           <div className={classes.cardActions}>
-            <Button {...buttonProps} className={classes.link} href={info.link}>
-              {labels.page}
-            </Button>
-            <Button {...buttonProps} color="secondary" href={pdfLink}>
-              {labels.pdf}
-            </Button>
-            <Button {...buttonProps} color="secondary" href={googleLink}>
-              {labels.google}
-            </Button>
+            <ExtLink
+              className={classes.link}
+              href={info.link}
+              label={labels.page}
+            />
+            <ExtLink
+              className={classes.link}
+              href={pdfLink}
+              label={labels.pdf}
+            />
+            <ExtLink
+              className={classes.link}
+              href={googleLink}
+              label={labels.google}
+            />
           </div>
         </div>
         {thumbnail && (
@@ -157,9 +187,9 @@ class ArticleCard extends React.Component<Props, State> {
             title={article.info.title}
           />
         )}
-      </Card>
+      </section>
     );
   }
 }
 
-export default withStyles(styles)(ArticleCard);
+export default ArticleCard;
