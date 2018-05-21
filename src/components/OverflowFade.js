@@ -27,7 +27,8 @@ const style = theme => ({
 });
 
 type Props = {
-  classes: MUIClasses
+  classes: MUIClasses,
+  className: string
 };
 
 class OverflowFade extends React.Component<Props> {
