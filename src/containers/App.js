@@ -4,7 +4,7 @@ import CssBase from "../components/CssBase";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import * as themes from "../theme";
 import AppBar from "../components/AppBar";
-import { BrowserRouter as Router } from "react-router-dom";
+import Router from "react-router-dom/BrowserRouter";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { changeTheme } from "../action/creators";

@@ -1,6 +1,8 @@
 //@flow
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import Route from "react-router-dom/Route";
+import Switch from "react-router-dom/Switch";
+import Redirect from "react-router-dom/Redirect";
 import { routes, BACK_TO_TOP_THRESHOLD } from "../config";
 import withStyles from "@material-ui/core/styles/withStyles";
 import SearchResults from "../components/SearchResults";
