@@ -5,7 +5,7 @@ type Props = {
   rel: string,
   target: string,
   href: string,
-  label: string
+  children: React.Node
 };
 
 /* Component that renders an external link that onClick opens up a new page/tab */
@@ -14,13 +14,13 @@ class ExtLink extends React.Component<Props> {
     rel: "noreferrer noopener",
     target: "_blank",
     href: "#",
-    label: "external link"
+    children: "external link"
   };
 
   render() {
-    const { label, ...rest } = this.props;
+    const { children, ...rest } = this.props;
 
-    return React.createElement("a", rest, label);
+    return React.createElement("a", rest, children);
   }
 }
 
