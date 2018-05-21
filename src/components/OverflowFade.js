@@ -20,6 +20,7 @@ const style = theme => ({
     zIndex: 5,
     width: "100%",
     height: "100%",
+    pointerEvents: "none",
     background: `linear-gradient(to bottom,transparent 65%, ${
       theme.palette.background.paper
     })`
