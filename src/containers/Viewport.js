@@ -1,7 +1,7 @@
 //@flow
 import * as React from "react";
 import debounce from "lodash.debounce";
-import { getDisplayName, computeChangedBitsFactory } from "../util/functions";
+import { computeChangedBitsFactory } from "../util/functions";
 import { VIEWPORT__DEBOUNCE_TIME } from "../config";
 import type { ComputeChangedBits } from "../util/functions";
 import { $html } from "../util/dom";
@@ -39,6 +39,8 @@ const { Provider, Consumer } = React.createContext(
   defaultViewport,
   computeChangedBits
 );
+
+export const ViewportConsumer = Consumer;
 
 const getViewport: () => Viewport = () => {
   if (!$html) {
@@ -78,7 +80,7 @@ export const ViewportProvider = class ScrollProvider extends React.Component<
       }
     },
     VIEWPORT__DEBOUNCE_TIME,
-    { leading: false, trailing: false }
+    { leading: false }
   );
 
   componentDidMount() {
@@ -102,28 +104,4 @@ export const ViewportProvider = class ScrollProvider extends React.Component<
       <Provider value={this.state.context}>{this.props.children}</Provider>
     );
   }
-};
-
-/* Consumer exported wrapped in a HOC */
-export const withViewport = (Comp: React.ComponentType<*>) => {
-  class ViewportHOC extends React.Component<{}> {
-    static displayName = getDisplayName(ViewportHOC.name, Comp);
-
-    renderProp: (value: Viewport) => React.Element<typeof Comp> = value => {
-      return React.createElement(Comp, {
-        ...this.props,
-        ...value
-      });
-    };
-
-    render() {
-      return (
-        <Consumer unstable_observedBits={bitmask.ALL}>
-          {this.renderProp}
-        </Consumer>
-      );
-    }
-  }
-
-  return ViewportHOC;
 };

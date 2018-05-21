@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createShallow } from "@material-ui/core/test-utils";
-import BackToTop, { BaseComponent } from "./BackToTop";
+import BackToTop from "./BackToTop";
 import Button from "@material-ui/core/Button";
 import { noop } from "../util/functions";
 
@@ -25,14 +25,14 @@ describe("src/components/BackToTop", () => {
   });
 
   it("renders a MUI button", () => {
-    wrapper = shallow(<BaseComponent {...propsFactory()} />);
+    wrapper = shallow(<BackToTop {...propsFactory()} />);
     expect(wrapper.find(Button)).toHaveLength(1);
   });
 
   it("is collapsed if scrollY is lower than the threshold", () => {
     const props = propsFactory(0, 1);
 
-    wrapper = shallow(<BaseComponent {...props} />);
+    wrapper = shallow(<BackToTop {...props} />);
 
     const jqObj = wrapper.render();
 
@@ -43,7 +43,7 @@ describe("src/components/BackToTop", () => {
 
   it("is visible if  if scrollY is greater than threshold", () => {
     const props = propsFactory(5, 1);
-    wrapper = shallow(<BaseComponent {...props} />);
+    wrapper = shallow(<BackToTop {...props} />);
 
     const jqObj = wrapper.render();
 
@@ -51,7 +51,7 @@ describe("src/components/BackToTop", () => {
   });
 
   it("has an a11y label", () => {
-    wrapper = shallow(<BaseComponent {...propsFactory()} />)
+    wrapper = shallow(<BackToTop {...propsFactory()} />)
       .find(Button)
       .dive();
 
@@ -61,7 +61,7 @@ describe("src/components/BackToTop", () => {
   it("calls scrollTo(0,0) onClick", () => {
     const props = propsFactory(10, 0, jest.fn());
 
-    wrapper = shallow(<BaseComponent {...props} />);
+    wrapper = shallow(<BackToTop {...props} />);
 
     wrapper.find(Button).simulate("click");
     expect(props.scrollTo.mock.calls).toHaveLength(1);

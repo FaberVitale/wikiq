@@ -3,7 +3,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import Zoom from "@material-ui/core/Zoom";
-import { withScroll } from "../containers/Scroll";
 
 type Props = {
   scrollY: number,
@@ -59,7 +58,4 @@ class BackToTop extends React.Component<Props> {
   }
 }
 
-// for testing only
-export const BaseComponent = BackToTop;
-
-export default withScroll(BackToTop);
+export default BackToTop;

@@ -7,7 +7,8 @@ import SearchResults from "../components/SearchResults";
 import BackToTop from "../components/BackToTop";
 import { nothing as Nothing } from "../util/functions";
 import { scrollTo } from "../util/dom";
-import { ScrollProvider } from "./Scroll";
+import { ScrollProvider, ScrollConsumer, bitmask } from "./Scroll";
+import type { Scroll } from "./Scroll";
 import { ViewportProvider } from "./Viewport";
 
 const styles = {
@@ -28,6 +29,14 @@ type Props = {
   classes: MUIClasses
 };
 
+const backToTopRender = ({ scrollY }: Scroll) => (
+  <BackToTop
+    scrollY={scrollY}
+    threshold={BACK_TO_TOP_THRESHOLD}
+    scrollTo={scrollTo}
+  />
+);
+
 class Main extends React.Component<Props> {
   render() {
     return (
@@ -39,7 +48,9 @@ class Main extends React.Component<Props> {
               <Route exact path={routes.home} component={Nothing} />
               <Redirect exact from="*" to={routes.home} />
             </Switch>
-            <BackToTop threshold={BACK_TO_TOP_THRESHOLD} scrollTo={scrollTo} />
+            <ScrollConsumer unstable_observedBits={bitmask.SCROLL_Y}>
+              {backToTopRender}
+            </ScrollConsumer>
           </main>
         </ScrollProvider>
       </ViewportProvider>

@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`src/containers/Scroll withScroll injects defaultScroll values if does not have ScrollProvider as anchestor 1`] = `"{\\"scrollX\\":-1,\\"scrollY\\":-1}"`;

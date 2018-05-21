@@ -1,7 +1,9 @@
 //@flow
 import * as React from "react";
-import { withScroll } from "./Scroll";
-import { withViewport } from "./Viewport";
+import { ScrollConsumer, bitmask as scrollMask } from "./Scroll";
+import { ViewportConsumer, bitmask as viewMask } from "./Viewport";
+import type { Scroll } from "./Scroll";
+import type { Viewport } from "./Viewport";
 
 type InfiniteScrollerPassThroughProps = {
   itemHeight: number,
@@ -80,4 +82,24 @@ class InfiniteScroller extends React.Component<
 // for testing only
 export const BaseComponent = InfiniteScroller;
 
-export default withViewport(withScroll(InfiniteScroller));
+// if Scroll changes updates only if scrollY changes
+const observedScroll = scrollMask.scrollY;
+
+// if Viewport changes updates only if viewportHeight changes
+const observedView = viewMask.viewportHeight;
+
+export default props => (
+  <ViewportConsumer unstable_observedBits={observedView}>
+    {({ viewportHeight }: Viewport) => (
+      <ScrollConsumer unstable_observedBits={observedScroll}>
+        {({ scrollY }: Scroll) => (
+          <InfiniteScroller
+            {...props}
+            viewportHeight={viewportHeight}
+            scrollY={scrollY}
+          />
+        )}
+      </ScrollConsumer>
+    )}
+  </ViewportConsumer>
+);
