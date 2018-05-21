@@ -82,6 +82,9 @@ export const NO_RESULTS = "0 results found";
 // throttle time span used by ScrollListener
 export const SCROLL_LISTENER_THROTTLE = 200;
 
+//debounce time applied to resize
+export const VIEWPORT__DEBOUNCE_TIME = 300;
+
 // if window has scrolled more than threshold Back to Top button will be visible
 export const BACK_TO_TOP_THRESHOLD = 300;
 
