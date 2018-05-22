@@ -21,7 +21,7 @@ const style = theme => ({
     width: "100%",
     height: "100%",
     pointerEvents: "none",
-    background: `linear-gradient(to bottom,transparent 65%, ${
+    background: `linear-gradient(to bottom,transparent 70%, ${
       theme.palette.background.paper
     })`
   }
