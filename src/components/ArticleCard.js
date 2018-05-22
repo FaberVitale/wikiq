@@ -58,11 +58,7 @@ export const classes = withStyles(theme => ({
     //some thumbnail has trasparency and was meant to be displayed on a white
     //background (wikipedia standard page)
     backgroundColor: "#ffffff",
-    transform: "translate3d(0, 0, 0)",
-    animationName: "fadeIn",
-    animationFillMode: "both",
-    animationDelay: 400,
-    animationDuration: 400
+    transform: "translate3d(0, 0, 0)"
   },
   text: {
     height: "90%",
