@@ -104,8 +104,8 @@ export const ScrollProvider = class ScrollProvider extends React.Component<
     window.addEventListener("scroll", this.updateScrollIfNecessary);
   }
 
-  componentDidUpdate(_: {}, { isScrolling }: prevState) {
-    if (this.state.context.isScrolling) {
+  componentDidUpdate(_: {}, { context }: prevState) {
+    if (context.isScrolling) {
       this.scrollEnd();
     }
   }
