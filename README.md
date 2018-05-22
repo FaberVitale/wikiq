@@ -44,7 +44,7 @@ different languages.
   flow-typed/
   public/         
   src/
-    __mocks__/
+    fixtures/
     action/
     components/
     container/

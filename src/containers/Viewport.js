@@ -1,17 +1,23 @@
 //@flow
 import * as React from "react";
-import throttle from "lodash.throttle";
-import { getDisplayName, computeChangedBitsFactory } from "../util/functions";
-import { SCROLL_LISTENER_THROTTLE } from "../config";
+import debounce from "lodash.debounce";
+import { computeChangedBitsFactory } from "../util/functions";
+import { VIEWPORT__DEBOUNCE_TIME } from "../config";
 import type { ComputeChangedBits } from "../util/functions";
 import { $html } from "../util/dom";
 
-type Viewport = {
+export type Viewport = {
   +viewportWidth: number,
   +viewportHeight: number
 };
 
-const ALL_PROP_BITMASK = 3;
+export const bitmask = {
+  ALL: 7,
+  VIEWPORT_WIDTH: 1,
+  VIEWPORT_HEIGHT: 2
+};
+
+Object.freeze(bitmask);
 
 /* Default context value: Consumers will return this value if 
  * Provider isn't an anchestor of Consumer or if window or 
@@ -33,6 +39,8 @@ const { Provider, Consumer } = React.createContext(
   defaultViewport,
   computeChangedBits
 );
+
+export const ViewportConsumer = Consumer;
 
 const getViewport: () => Viewport = () => {
   if (!$html) {
@@ -59,17 +67,21 @@ export const ViewportProvider = class ScrollProvider extends React.Component<
     children: null
   };
 
-  updateViewportIfNecessary: () => void = throttle(() => {
-    const nextViewport = getViewport();
+  updateViewportIfNecessary: () => void = debounce(
+    () => {
+      const nextViewport = getViewport();
 
-    /* Update only if and only if a property has changed:
+      /* Update only if and only if a property has changed:
      * this new context api uses reference equality to check if
      * Consumers should re-render
      */
-    if (computeChangedBits(this.state.context, nextViewport) > 0) {
-      this.setState({ context: nextViewport });
-    }
-  }, SCROLL_LISTENER_THROTTLE);
+      if (computeChangedBits(this.state.context, nextViewport) > 0) {
+        this.setState({ context: nextViewport });
+      }
+    },
+    VIEWPORT__DEBOUNCE_TIME,
+    { leading: false }
+  );
 
   componentDidMount() {
     window.addEventListener("resize", this.updateViewportIfNecessary);
@@ -92,28 +104,4 @@ export const ViewportProvider = class ScrollProvider extends React.Component<
       <Provider value={this.state.context}>{this.props.children}</Provider>
     );
   }
-};
-
-/* Consumer exported wrapped in a HOC */
-export const withViewport = (Comp: React.ComponentType<*>) => {
-  class ViewportHOC extends React.Component<{}> {
-    static displayName = getDisplayName(ViewportHOC.name, Comp);
-
-    renderProp: (value: Viewport) => React.Element<typeof Comp> = value => {
-      return React.createElement(Comp, {
-        ...this.props,
-        ...value
-      });
-    };
-
-    render() {
-      return (
-        <Consumer unstable_observedBits={ALL_PROP_BITMASK}>
-          {this.renderProp}
-        </Consumer>
-      );
-    }
-  }
-
-  return ViewportHOC;
 };

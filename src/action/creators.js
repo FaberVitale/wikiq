@@ -116,10 +116,12 @@ const fetchSearchAndThumbnails = (
     fetchJSON(searchURL).then(onSearchReceived, onSearchNotReceived);
   };
 
+  const timeout = 400;
+
   if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-    window.requestIdleCallback(cb);
+    window.requestIdleCallback(cb, { timeout });
   } else {
-    setTimeout(cb, 200);
+    setTimeout(cb, timeout - 200);
   }
 };
 

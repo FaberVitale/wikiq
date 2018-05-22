@@ -1,6 +1,6 @@
 import * as reducers from "./search";
-import { initState, search, initSearch } from "../__mocks__/reducers";
-import * as actions from "../__mocks__/actions";
+import { initState, search, initSearch } from "../fixtures/reducers";
+import * as actions from "../fixtures/actions";
 import * as actionTypes from "../action/types";
 import { PAGINATION_SIZE } from "../config";
 

@@ -34,7 +34,7 @@ const styles = theme => ({
       maxWidth: "100%",
       //removes double-tap to zoom, allows  pan or pinch to zoom
       touchAction: "manipulation",
-      fontFamily: '"Roboto"',
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       // MUI Grid container makes the horizontal scrollbar pop up
       overflowX: "auto",
       backgroundColor: theme.palette.background.default,

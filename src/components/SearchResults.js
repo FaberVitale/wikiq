@@ -4,8 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import { mapProps } from "recompose";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { decodeComponent } from "../util/query";
-import ArticlesContainer from "../containers/Articles";
-import Articles from "./Articles";
+import Articles from "../containers/Articles";
+import VirtualList from "../containers/VirtualList";
 import { LOCALES_TO_LANGUAGE } from "../config";
 import { xsDown } from "../theme";
 import {
@@ -18,8 +18,15 @@ import {
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
+import ArticleCard, { classes } from "./ArticleCard";
 
 const itemHeight = CARD_MARGIN + CARD_SIDE;
+
+const renderArticle = ({ lang, classes }, item) => (
+  <ArticleCard lang={lang} article={item} classes={classes} />
+);
+
+const WrappedVirtualList = classes(VirtualList);
 
 const renderPropArticles = props => {
   const {
@@ -28,13 +35,11 @@ const renderPropArticles = props => {
     data,
     isLoadingMore,
     lang,
-    query,
     loadMore,
     scrollY,
     viewportHeight
   } = props;
 
-  let articles = data;
   /* If an error has occorred display a message */
   if (error) {
     return (
@@ -49,7 +54,7 @@ const renderPropArticles = props => {
   }
 
   /* if articles have not been loaded and there's no error display a spinner */
-  if (articles === null) {
+  if (data === null) {
     return (
       <Fragment>
         <BottomPage>
@@ -75,7 +80,7 @@ const renderPropArticles = props => {
         </Button>
       ) : null;
   } else {
-    let msg = articles.length === 0 ? NO_RESULTS : SEARCH_COMPLETED;
+    let msg = data.length === 0 ? NO_RESULTS : SEARCH_COMPLETED;
 
     bottomPageChild = (
       <Typography component="p" color="secondary" variant="title">
@@ -86,13 +91,14 @@ const renderPropArticles = props => {
 
   return (
     <Fragment>
-      <Articles
+      <WrappedVirtualList
         lang={lang}
-        query={query}
-        articles={articles}
-        itemHeight={itemHeight}
-        scrollY={scrollY}
         viewportHeight={viewportHeight}
+        scrollY={scrollY}
+        itemHeight={itemHeight}
+        data={data}
+        buffer={5}
+        renderListItem={renderArticle}
       />
       <BottomPage>{bottomPageChild}</BottomPage>
     </Fragment>
@@ -154,7 +160,7 @@ class SearchResults extends React.Component<Props> {
             {subheading}
           </Typography>
         </header>
-        <ArticlesContainer
+        <Articles
           lang={lang}
           query={query}
           render={renderPropArticles}

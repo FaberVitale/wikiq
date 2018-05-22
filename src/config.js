@@ -79,8 +79,13 @@ export const SEARCH_COMPLETED = "✔ Done";
 // displayed when the query returned 0 results
 export const NO_RESULTS = "0 results found";
 
-// throttle time span used by ScrollListener
-export const SCROLL_LISTENER_THROTTLE = 200;
+// throttle timespan used by ScrollListener
+export const SCROLL_THROTTLE = 200;
+// debounce timespan used to trigger scrollEnd
+export const SCROLL_DEBOUNCE = 280;
+
+//debounce time applied to resize
+export const VIEWPORT__DEBOUNCE_TIME = 400;
 
 // if window has scrolled more than threshold Back to Top button will be visible
 export const BACK_TO_TOP_THRESHOLD = 300;

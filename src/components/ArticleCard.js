@@ -35,6 +35,11 @@ export const classes = withStyles(theme => ({
   title: {
     marginBottom: CARD_MARGIN >>> 1
   },
+  heading: {
+    "*:focus > &": {
+      color: theme.palette.background.paper
+    }
+  },
   cardActions: {
     height: "10%",
     display: "flex",
@@ -53,11 +58,7 @@ export const classes = withStyles(theme => ({
     //some thumbnail has trasparency and was meant to be displayed on a white
     //background (wikipedia standard page)
     backgroundColor: "#ffffff",
-    transform: "translate3d(0, 0, 0)",
-    animationName: "fadeIn",
-    animationFillMode: "both",
-    animationDelay: 400,
-    animationDuration: 400
+    transform: "translate3d(0, 0, 0)"
   },
   text: {
     height: "90%",
@@ -72,12 +73,14 @@ export const classes = withStyles(theme => ({
     color: theme.palette.secondary.main,
     fontWeight: "bold",
     textDecoration: "none",
-    fontSize: 14,
     outline: "none",
     "&:focus": {
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.background.paper
     }
+  },
+  bottomLink: {
+    fontSize: 14
   }
 }));
 
@@ -140,19 +143,24 @@ class ArticleCard extends React.Component<Props, State> {
     const { thumbnail, info } = article;
     const { pdfLink, googleLink } = this.state;
 
+    const titleLink = `${classes.title} ${classes.link}`;
+    const bottomLink = `${classes.link} ${classes.bottomLink}`;
+
     return (
       <section className={classes.card}>
         <div className={classes.content}>
           <div className={classes.text}>
             <OverflowFade />
-            <Typography
-              variant="title"
-              color="secondary"
-              className={classes.title}
-              component="h3"
-            >
-              {article.info.title}
-            </Typography>
+            <ExtLink className={titleLink} href={info.link}>
+              <Typography
+                variant="title"
+                className={classes.heading}
+                color="secondary"
+                component="h3"
+              >
+                {article.info.title}
+              </Typography>
+            </ExtLink>
             <Typography
               className={classes.description}
               variant="body2"
@@ -163,21 +171,12 @@ class ArticleCard extends React.Component<Props, State> {
             </Typography>
           </div>
           <div className={classes.cardActions}>
-            <ExtLink
-              className={classes.link}
-              href={info.link}
-              label={labels.page}
-            />
-            <ExtLink
-              className={classes.link}
-              href={pdfLink}
-              label={labels.pdf}
-            />
-            <ExtLink
-              className={classes.link}
-              href={googleLink}
-              label={labels.google}
-            />
+            <ExtLink className={bottomLink} href={pdfLink}>
+              {labels.pdf}
+            </ExtLink>
+            <ExtLink className={bottomLink} href={googleLink}>
+              {labels.google}
+            </ExtLink>
           </div>
         </div>
         {thumbnail && (

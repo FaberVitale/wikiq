@@ -1,7 +1,7 @@
 //@flow
 import * as React from "react";
 import { LOCALES } from "../config";
-import { withRouter } from "react-router-dom";
+import withRouter from "react-router-dom/withRouter";
 import { withHandlers, compose } from "recompose";
 import { makeSearchId } from "../util/query";
 

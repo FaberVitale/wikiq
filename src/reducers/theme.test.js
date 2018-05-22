@@ -1,6 +1,6 @@
 import { default as reducer } from "./theme";
 import * as actionTypes from "../action/types";
-import { initState } from "../__mocks__/reducers";
+import { initState } from "../fixtures/reducers";
 import { getTheme } from "../selectors";
 
 describe("reducers/index", () => {

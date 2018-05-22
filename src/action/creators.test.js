@@ -1,6 +1,6 @@
 import * as creators from "./creators";
-import * as actions from "../__mocks__/actions";
-import { ids, thumbnails, articles } from "../__mocks__/reducers";
+import * as actions from "../fixtures/actions";
+import { ids, thumbnails, articles } from "../fixtures/reducers";
 
 describe("src/action/creators", () => {
   test("simple action creators", () => {

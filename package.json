@@ -14,10 +14,12 @@
     "flow-bin": "^0.72.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.1.0",
+    "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prettier": "^1.11.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-loadable": "^5.4.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
@@ -36,6 +38,9 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier",
+      "git add"
+    ]
   }
 }

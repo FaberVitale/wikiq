@@ -1,5 +1,5 @@
 import * as selector from "./index";
-import { initState, search, searchId } from "../__mocks__/reducers";
+import { initState, search, searchId } from "../fixtures/reducers";
 
 describe("src/selectors", () => {
   test("getTheme", () => {
