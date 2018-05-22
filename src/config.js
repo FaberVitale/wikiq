@@ -82,7 +82,7 @@ export const NO_RESULTS = "0 results found";
 // throttle timespan used by ScrollListener
 export const SCROLL_THROTTLE = 200;
 // debounce timespan used to trigger scrollEnd
-export const SCROLL_DEBOUNCE = 260;
+export const SCROLL_DEBOUNCE = 280;
 
 //debounce time applied to resize
 export const VIEWPORT__DEBOUNCE_TIME = 400;
