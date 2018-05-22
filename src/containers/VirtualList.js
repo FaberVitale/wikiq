@@ -49,12 +49,13 @@ class VirtualList extends React.PureComponent<Props> {
 
   render() {
     const { viewportHeight, scrollY, itemHeight, data, buffer } = this.props;
-
+    /* it renders Math.min(len, Math.ceil(viewportHeight / itemHeight))
+     * elements */
     const len = data.length;
     const from = Math.max(0, Math.floor(scrollY / itemHeight) - buffer);
     const to = Math.min(
       len,
-      Math.ceil((viewportHeight + scrollY) / itemHeight + buffer)
+      Math.ceil(viewportHeight / itemHeight) + from + buffer
     );
 
     const containerStyle = {

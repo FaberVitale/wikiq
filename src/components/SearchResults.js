@@ -5,7 +5,7 @@ import { mapProps } from "recompose";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { decodeComponent } from "../util/query";
 import Articles from "../containers/Articles";
-import VirtualList from "./VirtualList";
+import VirtualList from "../containers/VirtualList";
 import { LOCALES_TO_LANGUAGE } from "../config";
 import { xsDown } from "../theme";
 import {
