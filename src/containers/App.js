@@ -22,7 +22,8 @@ const mapStateToProps = (state: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   toggleTheme: throttle(
     compose(dispatch, changeTheme),
-    CHANGE_THEME_THROTTLE_TIME
+    CHANGE_THEME_THROTTLE_TIME,
+    { trailing: false }
   )
 });
 
