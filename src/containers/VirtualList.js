@@ -1,5 +1,6 @@
 //@flow
 import * as React from "react";
+import { warn, isNaN } from "../util/functions";
 
 type Props = {
   renderListItem: (props: {}, item: mixed, index: number) => React.Node,
@@ -42,13 +43,34 @@ const renderList = (
   return list;
 };
 
+const makeErrorMessage = (propName: string, val: number) =>
+  `${propName} should be a number >= 0, got ${val}.\nFallback to default value`;
+
 class VirtualList extends React.PureComponent<Props> {
   static defaultProps = {
-    buffer: 10
+    buffer: 10,
+    itemHeight: 50
   };
 
   render() {
-    const { viewportHeight, scrollY, itemHeight, data, buffer } = this.props;
+    const { viewportHeight, scrollY, data } = this.props;
+
+    let buffer, itemHeight;
+
+    if (this.props.buffer < 0 || isNaN(this.props.buffer)) {
+      warn(makeErrorMessage("buffer", this.props.buffer));
+      buffer = VirtualList.defaultProps.buffer;
+    } else {
+      buffer = this.props.buffer;
+    }
+
+    if (this.props.itemHeight < 0 || isNaN(this.props.itemHeight)) {
+      warn(makeErrorMessage("itemHeight", this.props.itemHeight));
+      itemHeight = VirtualList.defaultProps.itemHeight;
+    } else {
+      itemHeight = this.props.itemHeight;
+    }
+
     /* it renders Math.min(len, Math.ceil(viewportHeight / itemHeight))
      * elements */
     const len = data.length;

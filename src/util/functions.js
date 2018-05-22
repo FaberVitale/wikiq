@@ -17,6 +17,11 @@ export const warn: (...args: Array<mixed>) => void =
 
 export const nothing: (...args: Array<mixed>) => null = () => null;
 
+// provided here because IE11 doesnt have number isNaN
+/* eslint-disable no-self-compare*/
+export const isNaN = (val: mixed) => val !== val;
+/* eslint-enable no-self compare */
+
 /* see: https://reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging
  */
 export const getDisplayName = (hocName: string, Comp: any) =>
