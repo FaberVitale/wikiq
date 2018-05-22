@@ -12,8 +12,9 @@ import type { State } from "../reducers";
 import type { Dispatch } from "../action/types";
 import { getTheme } from "../selectors";
 import throttle from "lodash.throttle";
-import { CHANGE_THEME_THROTTLE_TIME } from "../config";
-import Main from "./Main";
+import { CHANGE_THEME_THROTTLE_TIME, ERROR_MESSAGE } from "../config";
+import ErrorMessage from "../components/ErrorMessage";
+import Loadable from "react-loadable";
 
 const mapStateToProps = (state: State) => ({
   theme: getTheme(state)
@@ -31,6 +32,12 @@ type Props = {
   theme: string,
   toggleTheme: () => void
 };
+
+const Main = Loadable({
+  loader: () => import("./Main"),
+  loading: props =>
+    props.error ? <ErrorMessage>{ERROR_MESSAGE}</ErrorMessage> : null
+});
 
 class App extends React.Component<Props> {
   render() {
