@@ -1,6 +1,6 @@
 import * as fn from "./query";
-import { openSearch, thumbnails } from "../__mocks__/api";
-import { ids, articles, lang, query } from "../__mocks__/reducers";
+import { openSearch, thumbnails } from "../fixtures/api";
+import { ids, articles, lang, query } from "../fixtures/reducers";
 
 describe("src/util/query", () => {
   const plus3 = "+++";

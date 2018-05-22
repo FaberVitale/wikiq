@@ -1,6 +1,6 @@
 import ArticleCard, { classes } from "./ArticleCard";
 import { createMount } from "@material-ui/core/test-utils";
-import { articles, thumbnails, ids, lang } from "../__mocks__/reducers";
+import { articles, thumbnails, ids, lang } from "../fixtures/reducers";
 import React from "react";
 
 describe("src/components/ArticleCard", () => {

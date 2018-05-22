@@ -1,5 +1,5 @@
 import reducer from "./index";
-import { initState } from "../__mocks__/reducers";
+import { initState } from "../fixtures/reducers";
 
 describe("reducers/index", () => {
   it("returns the initial state if not provided", () => {

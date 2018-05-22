@@ -1,5 +1,5 @@
 import configureStore from "./configureStore";
-import { initState } from "./__mocks__/reducers";
+import { initState } from "./fixtures/reducers";
 
 describe("src/configureStore", () => {
   const isAReduxStore = store => {
