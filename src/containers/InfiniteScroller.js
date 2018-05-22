@@ -5,6 +5,11 @@ import { ViewportConsumer, bitmask as viewMask } from "./Viewport";
 import type { Scroll } from "./Scroll";
 import type { Viewport } from "./Viewport";
 
+type ContextProps = {
+  scrollY: number,
+  viewportHeight: number
+};
+
 type InfiniteScrollerPassThroughProps = {
   itemHeight: number,
   data: ?Array<*>,
@@ -12,14 +17,16 @@ type InfiniteScrollerPassThroughProps = {
   load: () => void,
   loadMore: () => void,
   isLoadingMore: boolean,
-  hasMore: boolean,
-  scrollY: number,
-  viewportHeight: number
+  hasMore: boolean
 };
 
 type InfiniteScrollerInternalProps = {
   render: (props: Object) => React.Node
 };
+
+type Props = ContextProps &
+  InfiniteScrollerInternalProps &
+  InfiniteScrollerPassThroughProps;
 
 /* Component that request data in an infinite scrolling manner:
  *  it delegates the rendering to a render function passed as a prop
@@ -32,9 +39,7 @@ type InfiniteScrollerInternalProps = {
  *    and if viewportHeight + the amount scrolled is >= 80% of the overall height
  *    of the items, call loadMore
  */
-class InfiniteScroller extends React.Component<
-  InfiniteScrollerInternalProps & InfiniteScrollerPassThroughProps
-> {
+class InfiniteScroller extends React.Component<Props> {
   loadIfNecessary = () => {
     const {
       data,
@@ -83,12 +88,14 @@ class InfiniteScroller extends React.Component<
 export const BaseComponent = InfiniteScroller;
 
 // if Scroll changes updates only if scrollY changes
-const observedScroll = scrollMask.scrollY;
+const observedScroll = scrollMask.SCROLL_Y;
 
 // if Viewport changes updates only if viewportHeight changes
-const observedView = viewMask.viewportHeight;
+const observedView = viewMask.VIEWPORT_HEIGHT;
 
-export default props => (
+export default (
+  props: InfiniteScrollerPassThroughProps & InfiniteScrollerInternalProps
+) => (
   <ViewportConsumer unstable_observedBits={observedView}>
     {({ viewportHeight }: Viewport) => (
       <ScrollConsumer unstable_observedBits={observedScroll}>

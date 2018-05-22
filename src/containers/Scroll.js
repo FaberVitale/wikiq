@@ -7,10 +7,18 @@ import { $html } from "../util/dom";
 import { SCROLL_THROTTLE, SCROLL_DEBOUNCE } from "../config";
 import type { ComputeChangedBits } from "../util/functions";
 
-type Scroll = {
+export type Scroll = {
   +scrollX: number,
   +scrollY: number,
   +isScrolling: boolean
+};
+
+type State = {
+  context: Scroll
+};
+
+type Props = {
+  children: React.Node
 };
 
 export const bitmask = {
@@ -45,9 +53,9 @@ const { Provider, Consumer } = React.createContext(
 
 export const ScrollConsumer = Consumer;
 
-const getScroll: () => Scroll = () => {
+const getScroll: () => { scrollX: number, scrollY: number } = () => {
   if (!$html || typeof window === "undefined") {
-    return defaultScroll;
+    return { scrollX: -1, scrollY: -1 };
   }
 
   let { pageYOffset, pageXOffset } = window;
@@ -64,8 +72,8 @@ const getScroll: () => Scroll = () => {
  * updates of context
  */
 export const ScrollProvider = class ScrollProvider extends React.Component<
-  { children: React.Node },
-  { context: Scroll }
+  Props,
+  State
 > {
   state = { context: { ...getScroll(), isScrolling: false } };
 
@@ -76,7 +84,7 @@ export const ScrollProvider = class ScrollProvider extends React.Component<
   scrollEnd: () => void = debounce(
     () => {
       if (this.state.context.isScrolling) {
-        this.setState(({ context }: Scroll) => ({
+        this.setState(({ context }: State) => ({
           context: {
             ...context,
             isScrolling: false
@@ -104,7 +112,7 @@ export const ScrollProvider = class ScrollProvider extends React.Component<
     window.addEventListener("scroll", this.updateScrollIfNecessary);
   }
 
-  componentDidUpdate(_: {}, { context }: prevState) {
+  componentDidUpdate(_: Props, { context }: State) {
     if (context.isScrolling) {
       this.scrollEnd();
     }

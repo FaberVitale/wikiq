@@ -6,7 +6,7 @@ import { VIEWPORT__DEBOUNCE_TIME } from "../config";
 import type { ComputeChangedBits } from "../util/functions";
 import { $html } from "../util/dom";
 
-type Viewport = {
+export type Viewport = {
   +viewportWidth: number,
   +viewportHeight: number
 };
