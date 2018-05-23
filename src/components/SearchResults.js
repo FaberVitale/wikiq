@@ -14,7 +14,11 @@ import {
   SEARCH_COMPLETED,
   CARD_MARGIN,
   CARD_SIDE,
-  VIRTUAL_LIST_BUFFER
+  BOTTOM_PAGE_HEIGHT,
+  BOTTOM_PAGE_MARGIN_TOP,
+  VIRTUAL_LIST_BUFFER,
+  MAIN_PADDING,
+  APPBAR_MIN_HEIGHT
 } from "../config";
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -22,6 +26,12 @@ import Button from "@material-ui/core/Button";
 import ArticleCard, { classes } from "./ArticleCard";
 
 const itemHeight = CARD_MARGIN + CARD_SIDE;
+const bottomMarginBoxHeight = BOTTOM_PAGE_HEIGHT + BOTTOM_PAGE_MARGIN_TOP;
+
+const headerHeight = 90;
+const headerMarginBottom = 32;
+
+const headerMarginBoxHeight = headerHeight + headerMarginBottom;
 
 const renderArticle = ({ lang, classes }, item) => (
   <ArticleCard lang={lang} article={item} classes={classes} />
@@ -73,13 +83,20 @@ const renderPropArticles = props => {
   if (isLoadingMore) {
     bottomPageChild = <CircularProgress size={30} color="secondary" />;
   } else if (hasMore) {
-    // add loadMore button for huge screens
-    bottomPageChild =
-      scrollY <= 0 ? (
-        <Button variant="raised" color="secondary" onClick={loadMore}>
-          {"Load More"}
-        </Button>
-      ) : null;
+    const contentHeigherThanViewport =
+      APPBAR_MIN_HEIGHT +
+        bottomMarginBoxHeight +
+        headerMarginBoxHeight +
+        2 * MAIN_PADDING +
+        itemHeight * data.length >
+      viewportHeight;
+
+    // add loadMore button for huge screens only (8k currently)
+    bottomPageChild = contentHeigherThanViewport ? null : (
+      <Button variant="raised" color="secondary" onClick={loadMore}>
+        {"Load More"}
+      </Button>
+    );
   } else {
     let msg = data.length === 0 ? NO_RESULTS : SEARCH_COMPLETED;
 
@@ -111,13 +128,16 @@ const styles = {
     padding: 16,
     //we have to set the width or ie11 wont wrap the flexbox items
     width: "100%",
+    // force the vert scrollbar
+    minHeight: "101vh",
     [xsDown]: {
       padding: "16px 0"
     }
   },
   header: {
     width: "100%",
-    marginBottom: 32
+    marginBottom: headerMarginBottom,
+    height: headerHeight
   },
   title: {
     marginBottom: 16

@@ -90,6 +90,15 @@ export const VIEWPORT__DEBOUNCE_TIME = 400;
 // number of elements that are rendered outside the viewport
 export const VIRTUAL_LIST_BUFFER = 6;
 
+// height of the component rendered below the Articles
+export const BOTTOM_PAGE_HEIGHT = 50;
+
+// marginTop of the component rendered below the articles
+export const BOTTOM_PAGE_MARGIN_TOP = 50;
+
+// padding applied to <main />
+export const MAIN_PADDING = 16;
+
 // if window has scrolled more than threshold Back to Top button will be visible
 export const BACK_TO_TOP_THRESHOLD = 300;
 
