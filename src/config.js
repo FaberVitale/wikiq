@@ -87,6 +87,9 @@ export const SCROLL_DEBOUNCE = 280;
 //debounce time applied to resize
 export const VIEWPORT__DEBOUNCE_TIME = 400;
 
+// number of elements that are rendered outside the viewport
+export const VIRTUAL_LIST_BUFFER = 6;
+
 // if window has scrolled more than threshold Back to Top button will be visible
 export const BACK_TO_TOP_THRESHOLD = 300;
 

@@ -13,7 +13,8 @@ import {
   NO_RESULTS,
   SEARCH_COMPLETED,
   CARD_MARGIN,
-  CARD_SIDE
+  CARD_SIDE,
+  VIRTUAL_LIST_BUFFER
 } from "../config";
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -97,7 +98,7 @@ const renderPropArticles = props => {
         scrollY={scrollY}
         itemHeight={itemHeight}
         data={data}
-        buffer={5}
+        buffer={VIRTUAL_LIST_BUFFER}
         renderListItem={renderArticle}
       />
       <BottomPage>{bottomPageChild}</BottomPage>
