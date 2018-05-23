@@ -29,9 +29,6 @@ export const classes = withStyles(theme => ({
     height: "100%",
     padding: 8
   },
-  title: {
-    marginBottom: CARD_MARGIN >>> 1
-  },
   heading: {
     "*:focus > &": {
       color: theme.palette.background.paper
@@ -63,8 +60,9 @@ export const classes = withStyles(theme => ({
     overflow: "hidden",
     position: "relative" // required to use OverflowFade correctly
   },
-  link: {
+  titleLink: {
     display: "inline-block",
+    marginBottom: CARD_MARGIN >>> 1,
     padding: "4px",
     borderRadius: 4,
     color: theme.palette.secondary.main,
@@ -77,7 +75,18 @@ export const classes = withStyles(theme => ({
     }
   },
   bottomLink: {
-    fontSize: 14
+    display: "inline-block",
+    padding: "4px",
+    borderRadius: 4,
+    color: theme.palette.secondary.main,
+    fontWeight: "bold",
+    textDecoration: "none",
+    outline: "none",
+    fontSize: 14,
+    "&:focus": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.background.paper
+    }
   }
 }));
 
@@ -140,15 +149,12 @@ class ArticleCard extends React.Component<Props, State> {
     const { thumbnail, info } = article;
     const { pdfLink, googleLink } = this.state;
 
-    const titleLink = `${classes.title} ${classes.link}`;
-    const bottomLink = `${classes.link} ${classes.bottomLink}`;
-
     return (
       <section className={classes.card}>
         <div className={classes.content}>
           <div className={classes.text}>
             <OverflowFade />
-            <ExtLink className={titleLink} href={info.link}>
+            <ExtLink className={classes.titleLink} href={info.link}>
               <Typography
                 variant="title"
                 className={classes.heading}
@@ -163,10 +169,10 @@ class ArticleCard extends React.Component<Props, State> {
             </Typography>
           </div>
           <div className={classes.cardActions}>
-            <ExtLink className={bottomLink} href={pdfLink}>
+            <ExtLink className={classes.bottomLink} href={pdfLink}>
               {labels.pdf}
             </ExtLink>
-            <ExtLink className={bottomLink} href={googleLink}>
+            <ExtLink className={classes.bottomLink} href={googleLink}>
               {labels.google}
             </ExtLink>
           </div>
