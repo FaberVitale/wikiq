@@ -3,7 +3,6 @@ import * as React from "react";
 import CssBase from "../components/CssBase";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import * as themes from "../theme";
-import AppBar from "../components/AppBar";
 import Router from "react-router-dom/BrowserRouter";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -12,7 +11,11 @@ import type { State } from "../reducers";
 import type { Dispatch } from "../action/types";
 import { getTheme } from "../selectors";
 import throttle from "lodash.throttle";
-import { CHANGE_THEME_THROTTLE_TIME, ERROR_MESSAGE } from "../config";
+import {
+  CHANGE_THEME_THROTTLE_TIME,
+  ERROR_MESSAGE,
+  APPBAR_MIN_HEIGHT
+} from "../config";
 import ErrorMessage from "../components/ErrorMessage";
 import Loadable from "react-loadable";
 
@@ -33,10 +36,24 @@ type Props = {
   toggleTheme: () => void
 };
 
+const AppBar = Loadable({
+  loader: () => import("../components/AppBar"),
+  loading: props =>
+    props.error ? (
+      <ErrorMessage style={{ height: APPBAR_MIN_HEIGHT }}>
+        {ERROR_MESSAGE}
+      </ErrorMessage>
+    ) : null
+});
+
 const Main = Loadable({
   loader: () => import("./Main"),
   loading: props =>
-    props.error ? <ErrorMessage>{ERROR_MESSAGE}</ErrorMessage> : null
+    props.error ? (
+      <ErrorMessage style={{ marginTop: APPBAR_MIN_HEIGHT + 16 }}>
+        {ERROR_MESSAGE}
+      </ErrorMessage>
+    ) : null
 });
 
 class App extends React.Component<Props> {

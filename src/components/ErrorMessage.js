@@ -1,12 +1,10 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { APPBAR_MIN_HEIGHT } from "../config";
 
 const style = theme => ({
   paragraph: {
-    color: "white",
-    fontSize: 18,
-    margin: `${APPBAR_MIN_HEIGHT + 16}px 16px 0 16px`
+    color: theme.palette.primary.contrastText,
+    padding: 16
   }
 });
 
@@ -18,8 +16,15 @@ type Props = {
 const defaultMessage = "an error has occurred";
 
 const ErrorMessage = (props: Props) => {
+  const { className, classes, ...rest } = this.props;
+
   return (
-    <p className={props.classes.paragraph}>
+    <p
+      className={
+        className ? `${classes.paragraph} ${className}` : classes.paragraph
+      }
+      {...rest}
+    >
       {props.children || defaultMessage}
     </p>
   );
