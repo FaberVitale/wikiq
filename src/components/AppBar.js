@@ -8,6 +8,11 @@ import { default as SearchFormView } from "./SearchForm";
 
 const style = theme => ({
   header: {
+    // hide Flash of Unstyled Text, it happens in chrome
+    animationName: "fadeIn",
+    animationDuration: 300,
+    animationDelay: 200,
+    animationFillMode: "both",
     position: "fixed",
     top: 0,
     left: 0,
