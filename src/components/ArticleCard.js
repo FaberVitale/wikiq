@@ -29,9 +29,6 @@ export const classes = withStyles(theme => ({
     height: "100%",
     padding: 8
   },
-  description: {
-    fontSize: "16px"
-  },
   title: {
     marginBottom: CARD_MARGIN >>> 1
   },
@@ -161,12 +158,7 @@ class ArticleCard extends React.Component<Props, State> {
                 {article.info.title}
               </Typography>
             </ExtLink>
-            <Typography
-              className={classes.description}
-              variant="body2"
-              color="textSecondary"
-              component="p"
-            >
+            <Typography variant="body2" color="textSecondary" component="p">
               {article.info.description}
             </Typography>
           </div>
