@@ -135,6 +135,11 @@ const styles = {
     }
   },
   header: {
+    // hide Flash of Unstyled Text, it happens in chrome
+    animationName: "fadeIn",
+    animationDuration: 300,
+    animationDelay: 200,
+    animationFillMode: "both",
     width: "100%",
     marginBottom: headerMarginBottom,
     height: headerHeight
