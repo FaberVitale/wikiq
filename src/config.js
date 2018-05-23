@@ -79,8 +79,8 @@ export const SEARCH_COMPLETED = "✔ Done";
 // displayed when the query returned 0 results
 export const NO_RESULTS = "0 results found";
 
-// throttle timespan used by ScrollListener
-export const SCROLL_THROTTLE = 200;
+// throttle timespan used on scroll event
+export const SCROLL_THROTTLE = 150;
 // debounce timespan used to trigger scrollEnd
 export const SCROLL_DEBOUNCE = 280;
 
