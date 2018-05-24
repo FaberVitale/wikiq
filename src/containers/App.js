@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { changeTheme } from "../action/creators";
 import type { State } from "../reducers";
+import AppBar from "../components/AppBar";
 import type { Dispatch } from "../action/types";
 import { getTheme } from "../selectors";
 import throttle from "lodash.throttle";
@@ -35,16 +36,6 @@ type Props = {
   theme: string,
   toggleTheme: () => void
 };
-
-const AppBar = Loadable({
-  loader: () => import("../components/AppBar"),
-  loading: props =>
-    props.error ? (
-      <ErrorMessage style={{ height: APPBAR_MIN_HEIGHT }}>
-        {ERROR_MESSAGE}
-      </ErrorMessage>
-    ) : null
-});
 
 const Main = Loadable({
   loader: () => import("./Main"),
