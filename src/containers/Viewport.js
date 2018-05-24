@@ -24,8 +24,8 @@ Object.freeze(bitmask);
  * window.document.documentElement is not defined
  */
 export const defaultViewport: Viewport = {
-  viewportWidth: -1,
-  viewportHeight: -1
+  viewportWidth: 0,
+  viewportHeight: 0
 };
 
 Object.freeze(defaultViewport);
