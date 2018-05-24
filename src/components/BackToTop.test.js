@@ -3,10 +3,9 @@ import ReactDOM from "react-dom";
 import { createShallow } from "@material-ui/core/test-utils";
 import BackToTop from "./BackToTop";
 import Button from "@material-ui/core/Button";
-import { noop } from "../util/functions";
 
 describe("src/components/BackToTop", () => {
-  const propsFactory = (scrollY = 0, threshold = 0, scrollTo = noop) => ({
+  const propsFactory = (scrollY = 0, threshold = 0, scrollTo = () => {}) => ({
     scrollY,
     threshold,
     scrollTo

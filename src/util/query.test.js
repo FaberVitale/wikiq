@@ -88,4 +88,70 @@ describe("src/util/query", () => {
       )
     ).toBe(true);
   });
+
+  describe("fetchJSON", () => {
+    let realFetch;
+    const res = { json: "res" };
+
+    let mockFetch = () => {
+      if (mockFetch.throw) {
+        throw new TypeError("errr");
+      }
+      return {
+        status: mockFetch.status,
+        json() {
+          return res;
+        }
+      };
+    };
+
+    beforeEach(() => {
+      mockFetch.status = 200;
+      mockFetch.throw = false;
+    });
+
+    beforeAll(() => {
+      realFetch = window.fetch;
+      window.fetch = mockFetch;
+    });
+
+    afterAll(() => {
+      window.fetch = realFetch;
+    });
+
+    it("returns the object request if status is 200", done => {
+      expect.assertions(1);
+
+      return fn.fetchJSON("er").then(json => {
+        expect(json).toBe(res);
+        done();
+      }, done);
+    });
+
+    it("rejects if status isn't 200", done => {
+      mockFetch.status = 500;
+
+      return fn.fetchJSON("url").then(
+        json => {
+          done(new Error("Test failed: it should not return an object"));
+        },
+        _ => {
+          done();
+        }
+      );
+    });
+
+    it("rejects if an error occurs", done => {
+      mockFetch.throw = true;
+
+      return fn
+        .fetchJSON("url")
+        .then(
+          done.bind(null, new Error("Test Failed it should not fulfill")),
+          _ => {
+            done();
+          }
+        );
+    });
+  });
 });
