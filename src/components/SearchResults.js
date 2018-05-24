@@ -24,6 +24,8 @@ import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import ArticleCard, { classes } from "./ArticleCard";
+import ScrollToTop from "./ScrollToTop";
+import { scrollTo } from "../util/dom";
 
 const itemHeight = CARD_MARGIN + CARD_SIDE;
 const bottomMarginBoxHeight = BOTTOM_PAGE_HEIGHT + BOTTOM_PAGE_MARGIN_TOP;
@@ -186,6 +188,7 @@ class SearchResults extends React.Component<Props> {
             {subheading}
           </Typography>
         </header>
+        <ScrollToTop scrollTo={scrollTo} />
         <Articles
           lang={lang}
           query={query}
