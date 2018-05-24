@@ -22,7 +22,15 @@ const styles = {
 const renderList = (
   from: number,
   to: number,
-  { itemHeight, scrollY, data, renderListItem, viewportHeight, ...rest }: Props
+  {
+    buffer,
+    itemHeight,
+    scrollY,
+    data,
+    renderListItem,
+    viewportHeight,
+    ...rest
+  }: Props
 ) => {
   let list = [];
 
@@ -71,14 +79,25 @@ class VirtualList extends React.PureComponent<Props> {
       itemHeight = this.props.itemHeight;
     }
 
-    /* it renders Math.min(len, Math.ceil(viewportHeight / itemHeight))
-     * elements */
     const len = data.length;
-    const from = Math.max(0, Math.floor(scrollY / itemHeight) - buffer);
-    const to = Math.min(
-      len,
-      Math.ceil(viewportHeight / itemHeight) + from + buffer
-    );
+    /* half rounded down is displayed below and 
+     * half rounded up is displayed below
+     * 
+     * it renders Math.min(len, inView + buffer)
+     * 
+     * if from is 0 below === buffer, above = 0
+     * if to is len above === buffer, below = 0
+     */
+    let above = Math.floor(buffer / 2);
+
+    const inView = Math.ceil(viewportHeight / itemHeight);
+
+    let from = Math.max(0, Math.floor(scrollY / itemHeight) - above);
+    let to = Math.min(len, inView + from + buffer);
+
+    if (to === len) {
+      from = Math.max(0, to - inView - buffer);
+    }
 
     const containerStyle = {
       position: "relative",
