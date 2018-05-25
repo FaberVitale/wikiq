@@ -34,8 +34,8 @@ Object.freeze(bitmask);
  * Provider isn't an anchestor of Consumer or if window is not defined
  */
 export const defaultScroll: Scroll = {
-  scrollX: -1,
-  scrollY: -1,
+  scrollX: 0,
+  scrollY: 0,
   isScrolling: false
 };
 
@@ -53,9 +53,9 @@ const { Provider, Consumer } = React.createContext(
 
 export const ScrollConsumer = Consumer;
 
-const getScroll: () => { scrollX: number, scrollY: number } = () => {
+const getScroll: (isScrolling?: boolean) => Scroll = (isScrolling = false) => {
   if (!$html || typeof window === "undefined") {
-    return { scrollX: -1, scrollY: -1 };
+    return defaultScroll;
   }
 
   let { pageYOffset, pageXOffset } = window;
@@ -63,7 +63,8 @@ const getScroll: () => { scrollX: number, scrollY: number } = () => {
   /* see: https://github.com/ReactTraining/react-router/issues/605  */
   return {
     scrollX: typeof pageXOffset === "number" ? pageXOffset : $html.scrollLeft,
-    scrollY: typeof pageYOffset === "number" ? pageYOffset : $html.scrollTop
+    scrollY: typeof pageYOffset === "number" ? pageYOffset : $html.scrollTop,
+    isScrolling
   };
 };
 
@@ -75,7 +76,7 @@ export const ScrollProvider = class ScrollProvider extends React.Component<
   Props,
   State
 > {
-  state = { context: { ...getScroll(), isScrolling: false } };
+  state = { context: getScroll() };
 
   static defaultProps = {
     children: null
@@ -97,7 +98,7 @@ export const ScrollProvider = class ScrollProvider extends React.Component<
   );
 
   updateScrollIfNecessary: () => void = throttle(() => {
-    const nextScroll = { ...getScroll(), isScrolling: true };
+    const nextScroll = getScroll(true);
 
     /* Update only if and only if a property has changed:
      * this new context api uses reference equality to check if

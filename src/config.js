@@ -79,13 +79,28 @@ export const SEARCH_COMPLETED = "✔ Done";
 // displayed when the query returned 0 results
 export const NO_RESULTS = "0 results found";
 
-// throttle timespan used by ScrollListener
-export const SCROLL_THROTTLE = 200;
+// throttle timespan used on scroll event
+export const SCROLL_THROTTLE = 150;
 // debounce timespan used to trigger scrollEnd
 export const SCROLL_DEBOUNCE = 280;
 
 //debounce time applied to resize
 export const VIEWPORT__DEBOUNCE_TIME = 400;
+
+// number of elements that are rendered outside the viewport
+export const VIRTUAL_LIST_BUFFER = 6;
+
+// height of the component rendered below the Articles
+export const BOTTOM_PAGE_HEIGHT = 50;
+
+// marginTop of the component rendered below the articles
+export const BOTTOM_PAGE_MARGIN_TOP = 50;
+
+// padding applied to <main />
+export const MAIN_PADDING = 16;
+
+//article padding
+export const ARTICLE_PADDING = 16;
 
 // if window has scrolled more than threshold Back to Top button will be visible
 export const BACK_TO_TOP_THRESHOLD = 300;

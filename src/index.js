@@ -6,7 +6,6 @@ import registerServiceWorker from "./registerServiceWorker";
 import { REACT_ROOT_ID } from "./config";
 import { Provider } from "react-redux";
 import configureStore from "./configureStore";
-import "./fonts/roboto-typeface.css";
 
 const root = document.getElementById(REACT_ROOT_ID);
 

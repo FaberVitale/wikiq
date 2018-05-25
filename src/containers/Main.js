@@ -31,6 +31,7 @@ type Props = {
   classes: MUIClasses
 };
 
+// render prop used to inject scrollY to BackToTop
 const backToTopRender = ({ scrollY }: Scroll) => (
   <BackToTop
     scrollY={scrollY}

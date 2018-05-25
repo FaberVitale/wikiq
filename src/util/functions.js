@@ -17,6 +17,8 @@ export const warn: (...args: Array<mixed>) => void =
 
 export const nothing: (...args: Array<mixed>) => null = () => null;
 
+export const identity = (id: mixed) => id;
+
 // provided here because IE11 doesnt have number isNaN
 /* eslint-disable no-self-compare*/
 export const isNaN = (val: mixed) => val !== val;

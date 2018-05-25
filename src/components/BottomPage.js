@@ -1,5 +1,6 @@
 //@flow
 import * as React from "react";
+import { BOTTOM_PAGE_HEIGHT, BOTTOM_PAGE_MARGIN_TOP } from "../config";
 
 type Props = {
   children: React.Node
@@ -13,8 +14,8 @@ class BottomPage extends React.Component<Props> {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      marginTop: 50,
-      height: 50, // <-- !important, it has fixed height
+      marginTop: BOTTOM_PAGE_HEIGHT,
+      height: BOTTOM_PAGE_MARGIN_TOP, // <-- !important, it has fixed height
       overflow: "auto"
     }
   };

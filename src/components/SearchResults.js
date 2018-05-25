@@ -13,14 +13,31 @@ import {
   NO_RESULTS,
   SEARCH_COMPLETED,
   CARD_MARGIN,
-  CARD_SIDE
+  CARD_SIDE,
+  BOTTOM_PAGE_HEIGHT,
+  BOTTOM_PAGE_MARGIN_TOP,
+  VIRTUAL_LIST_BUFFER,
+  MAIN_PADDING,
+  APPBAR_MIN_HEIGHT,
+  ARTICLE_PADDING
 } from "../config";
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import ArticleCard, { classes } from "./ArticleCard";
+import ScrollToTop from "./ScrollToTop";
+import { scrollTo } from "../util/dom";
 
 const itemHeight = CARD_MARGIN + CARD_SIDE;
+const bottomMarginBoxHeight = BOTTOM_PAGE_HEIGHT + BOTTOM_PAGE_MARGIN_TOP;
+
+const headerHeight = 90;
+const headerMarginBottom = 32;
+
+const headerMarginBoxHeight = headerHeight + headerMarginBottom;
+
+const offsetTop =
+  headerMarginBoxHeight + MAIN_PADDING + ARTICLE_PADDING + APPBAR_MIN_HEIGHT;
 
 const renderArticle = ({ lang, classes }, item) => (
   <ArticleCard lang={lang} article={item} classes={classes} />
@@ -72,13 +89,20 @@ const renderPropArticles = props => {
   if (isLoadingMore) {
     bottomPageChild = <CircularProgress size={30} color="secondary" />;
   } else if (hasMore) {
-    // add loadMore button for huge screens
-    bottomPageChild =
-      scrollY <= 0 ? (
-        <Button variant="raised" color="secondary" onClick={loadMore}>
-          {"Load More"}
-        </Button>
-      ) : null;
+    const contentHeigherThanViewport =
+      APPBAR_MIN_HEIGHT +
+        bottomMarginBoxHeight +
+        headerMarginBoxHeight +
+        2 * MAIN_PADDING +
+        itemHeight * data.length >
+      viewportHeight;
+
+    // add loadMore button for huge screens only (8k currently)
+    bottomPageChild = contentHeigherThanViewport ? null : (
+      <Button variant="raised" color="secondary" onClick={loadMore}>
+        {"Load More"}
+      </Button>
+    );
   } else {
     let msg = data.length === 0 ? NO_RESULTS : SEARCH_COMPLETED;
 
@@ -97,7 +121,8 @@ const renderPropArticles = props => {
         scrollY={scrollY}
         itemHeight={itemHeight}
         data={data}
-        buffer={5}
+        offsetTop={offsetTop}
+        buffer={VIRTUAL_LIST_BUFFER}
         renderListItem={renderArticle}
       />
       <BottomPage>{bottomPageChild}</BottomPage>
@@ -110,13 +135,21 @@ const styles = {
     padding: 16,
     //we have to set the width or ie11 wont wrap the flexbox items
     width: "100%",
+    // force the vert scrollbar
+    minHeight: "101vh",
     [xsDown]: {
       padding: "16px 0"
     }
   },
   header: {
+    // hide Flash of Unstyled Text, it happens in chrome
+    animationName: "fadeIn",
+    animationDuration: 300,
+    animationDelay: 200,
+    animationFillMode: "both",
     width: "100%",
-    marginBottom: 32
+    marginBottom: headerMarginBottom,
+    height: headerHeight
   },
   title: {
     marginBottom: 16
@@ -160,6 +193,7 @@ class SearchResults extends React.Component<Props> {
             {subheading}
           </Typography>
         </header>
+        <ScrollToTop scrollTo={scrollTo} />
         <Articles
           lang={lang}
           query={query}

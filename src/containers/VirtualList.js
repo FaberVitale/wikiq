@@ -7,6 +7,7 @@ type Props = {
   itemHeight: number,
   scrollY: number,
   viewportHeight: number,
+  offsetTop: number,
   buffer: number,
   data: Array<mixed>
 };
@@ -22,7 +23,15 @@ const styles = {
 const renderList = (
   from: number,
   to: number,
-  { itemHeight, scrollY, data, renderListItem, viewportHeight, ...rest }: Props
+  {
+    buffer,
+    itemHeight,
+    scrollY,
+    data,
+    renderListItem,
+    viewportHeight,
+    ...rest
+  }: Props
 ) => {
   let list = [];
 
@@ -49,13 +58,23 @@ const makeErrorMessage = (propName: string, val: number) =>
 class VirtualList extends React.PureComponent<Props> {
   static defaultProps = {
     buffer: 10,
-    itemHeight: 50
+    itemHeight: 50,
+    offsetTop: 0
   };
+
+  rootRef = React.createRef();
 
   render() {
     const { viewportHeight, scrollY, data } = this.props;
 
-    let buffer, itemHeight;
+    let buffer, itemHeight, offsetTop;
+
+    if (this.props.offsetTop < 0 || isNaN(this.props.offsetTop)) {
+      warn(makeErrorMessage("offsetTop", this.props.offsetTop));
+      offsetTop = VirtualList.defaultProps.offsetTop;
+    } else {
+      offsetTop = this.props.offsetTop;
+    }
 
     if (this.props.buffer < 0 || isNaN(this.props.buffer)) {
       warn(makeErrorMessage("buffer", this.props.buffer));
@@ -71,21 +90,39 @@ class VirtualList extends React.PureComponent<Props> {
       itemHeight = this.props.itemHeight;
     }
 
-    /* it renders Math.min(len, Math.ceil(viewportHeight / itemHeight))
-     * elements */
     const len = data.length;
-    const from = Math.max(0, Math.floor(scrollY / itemHeight) - buffer);
-    const to = Math.min(
-      len,
-      Math.ceil(viewportHeight / itemHeight) + from + buffer
+    /* half rounded down is displayed below and 
+     * half rounded up is displayed below
+     * 
+     * it renders Math.min(len, inView + buffer)
+     * 
+     * if from is 0 below === buffer, above = 0
+     * if to is len above === buffer, below = 0
+     */
+    let above = Math.floor(buffer / 2);
+
+    const inView = Math.ceil(viewportHeight / itemHeight);
+
+    let from = Math.max(
+      0,
+      Math.floor((scrollY - offsetTop) / itemHeight) - above
     );
+    let to = Math.min(len, inView + from + buffer);
+
+    if (to === len) {
+      from = Math.max(0, to - inView - buffer);
+    }
 
     const containerStyle = {
       position: "relative",
       height: len * itemHeight
     };
 
-    return <div style={containerStyle}>{renderList(from, to, this.props)}</div>;
+    return (
+      <div ref={this.rootRef} style={containerStyle}>
+        {renderList(from, to, this.props)}
+      </div>
+    );
   }
 }
 

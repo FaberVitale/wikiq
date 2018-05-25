@@ -114,4 +114,7 @@ class FormState extends React.Component<Props, State> {
   }
 }
 
+//for testing only
+export const BaseComponent = FormState;
+
 export default compose(withRouter, addSubmit)(FormState);
