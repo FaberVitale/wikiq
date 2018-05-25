@@ -18,7 +18,8 @@ import {
   BOTTOM_PAGE_MARGIN_TOP,
   VIRTUAL_LIST_BUFFER,
   MAIN_PADDING,
-  APPBAR_MIN_HEIGHT
+  APPBAR_MIN_HEIGHT,
+  ARTICLE_PADDING
 } from "../config";
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -34,6 +35,9 @@ const headerHeight = 90;
 const headerMarginBottom = 32;
 
 const headerMarginBoxHeight = headerHeight + headerMarginBottom;
+
+const offsetTop =
+  headerMarginBoxHeight + MAIN_PADDING + ARTICLE_PADDING + APPBAR_MIN_HEIGHT;
 
 const renderArticle = ({ lang, classes }, item) => (
   <ArticleCard lang={lang} article={item} classes={classes} />
@@ -117,6 +121,7 @@ const renderPropArticles = props => {
         scrollY={scrollY}
         itemHeight={itemHeight}
         data={data}
+        offsetTop={offsetTop}
         buffer={VIRTUAL_LIST_BUFFER}
         renderListItem={renderArticle}
       />

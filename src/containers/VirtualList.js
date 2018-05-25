@@ -7,6 +7,7 @@ type Props = {
   itemHeight: number,
   scrollY: number,
   viewportHeight: number,
+  offsetTop: number,
   buffer: number,
   data: Array<mixed>
 };
@@ -57,13 +58,23 @@ const makeErrorMessage = (propName: string, val: number) =>
 class VirtualList extends React.PureComponent<Props> {
   static defaultProps = {
     buffer: 10,
-    itemHeight: 50
+    itemHeight: 50,
+    offsetTop: 0
   };
+
+  rootRef = React.createRef();
 
   render() {
     const { viewportHeight, scrollY, data } = this.props;
 
-    let buffer, itemHeight;
+    let buffer, itemHeight, offsetTop;
+
+    if (this.props.offsetTop < 0 || isNaN(this.props.offsetTop)) {
+      warn(makeErrorMessage("offsetTop", this.props.offsetTop));
+      offsetTop = VirtualList.defaultProps.offsetTop;
+    } else {
+      offsetTop = this.props.offsetTop;
+    }
 
     if (this.props.buffer < 0 || isNaN(this.props.buffer)) {
       warn(makeErrorMessage("buffer", this.props.buffer));
@@ -92,7 +103,10 @@ class VirtualList extends React.PureComponent<Props> {
 
     const inView = Math.ceil(viewportHeight / itemHeight);
 
-    let from = Math.max(0, Math.floor(scrollY / itemHeight) - above);
+    let from = Math.max(
+      0,
+      Math.floor((scrollY - offsetTop) / itemHeight) - above
+    );
     let to = Math.min(len, inView + from + buffer);
 
     if (to === len) {
@@ -104,7 +118,11 @@ class VirtualList extends React.PureComponent<Props> {
       height: len * itemHeight
     };
 
-    return <div style={containerStyle}>{renderList(from, to, this.props)}</div>;
+    return (
+      <div ref={this.rootRef} style={containerStyle}>
+        {renderList(from, to, this.props)}
+      </div>
+    );
   }
 }
 
