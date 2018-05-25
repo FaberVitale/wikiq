@@ -21,7 +21,8 @@ import {
 import {
   shouldFetchSearch,
   hasMoreThumbnails,
-  isFetchingThumbnails
+  isFetchingThumbnails,
+  getTheme
 } from "../selectors";
 import {
   OPEN_SEARCH_LIMIT,
@@ -30,6 +31,8 @@ import {
   CARD_SIDE
 } from "../config";
 import { warn } from "../util/functions";
+import debounce from "lodash.debounce";
+import { $localStorage } from "../util/dom";
 
 export const changeTheme: () => ChangeThemeAction = () => ({
   type: CHANGE_THEME
@@ -239,5 +242,28 @@ const loadMoreThumbnails: (lang: string, searchId: string) => ThunkAction = (
     const thumbnailURL = getThumbnailURL(lang, titles, CARD_SIDE);
 
     fetchJSON(thumbnailURL).then(onFulFill, onRejection);
+  };
+};
+
+const persistTheme = debounce(
+  (theme: string) => {
+    if (!$localStorage) {
+      return;
+    }
+    try {
+      $localStorage.setItem("theme", theme);
+    } catch (e) {
+      warn(`unable to persist theme: ${theme}`);
+    }
+  },
+  1000,
+  { leading: false }
+);
+
+export const requestChangeTheme: () => ThunkAction = theme => {
+  return (dispatch: Dispatch, getState) => {
+    dispatch(changeTheme());
+
+    persistTheme(getTheme(getState()));
   };
 };

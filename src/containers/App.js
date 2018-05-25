@@ -6,7 +6,7 @@ import * as themes from "../theme";
 import Router from "react-router-dom/BrowserRouter";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { changeTheme } from "../action/creators";
+import { requestChangeTheme } from "../action/creators";
 import type { State } from "../reducers";
 import AppBar from "../components/AppBar";
 import type { Dispatch } from "../action/types";
@@ -26,7 +26,7 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   toggleTheme: throttle(
-    compose(dispatch, changeTheme),
+    compose(dispatch, requestChangeTheme),
     CHANGE_THEME_THROTTLE_TIME,
     { trailing: false }
   )

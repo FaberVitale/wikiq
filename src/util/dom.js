@@ -17,3 +17,11 @@ export const scrollTo =
   environmentHasWindow && typeof window.scrollTo === "function"
     ? window.scrollTo.bind(window)
     : noop;
+
+export const $localStorage: Storage | null =
+  typeof window !== "undefined" &&
+  window.localStorage &&
+  typeof window.localStorage.getItem === "function" &&
+  typeof window.localStorage.setItem === "function"
+    ? window.localStorage
+    : null;
