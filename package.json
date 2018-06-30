@@ -1,6 +1,6 @@
 {
   "name": "wikiq",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "private": true,
   "repository": {
     "type": "git",
@@ -38,9 +38,6 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,json,css}": ["prettier", "git add"]
   }
 }
