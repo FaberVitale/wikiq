@@ -10,7 +10,7 @@ type Props = {
   scrollTo: (...args: Array<mixed>) => void
 };
 
-/* Simple Back to Top button that is visible when window.scrollY 
+/* Simple Back to Top button that is visible when window.scrollY
  * is higher than BACK_TO_TOP_THRESHOLD */
 class BackToTop extends React.Component<Props> {
   static style = {

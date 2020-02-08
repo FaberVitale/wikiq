@@ -30,7 +30,7 @@ export const bitmask = {
 
 Object.freeze(bitmask);
 
-/* Default context value: Consumers will return this value if 
+/* Default context value: Consumers will return this value if
  * Provider isn't an anchestor of Consumer or if window is not defined
  */
 export const defaultScroll: Scroll = {
@@ -41,9 +41,9 @@ export const defaultScroll: Scroll = {
 
 Object.freeze(defaultScroll);
 
-const computeChangedBits: ComputeChangedBits<
-  Scroll
-> = computeChangedBitsFactory(["scrollX", "scrollY", "isScrolling"]);
+const computeChangedBits: ComputeChangedBits<Scroll> = computeChangedBitsFactory(
+  ["scrollX", "scrollY", "isScrolling"]
+);
 
 // $FlowFixMe - Flow( flow-bin 0.72.0) hasnt updated the definitions of React
 const { Provider, Consumer } = React.createContext(
@@ -68,7 +68,7 @@ const getScroll: (isScrolling?: boolean) => Scroll = (isScrolling = false) => {
   };
 };
 
-/* Component that holds the context, 
+/* Component that holds the context,
  * it uses a throttled scroll listener to triggers
  * updates of context
  */

@@ -12,7 +12,7 @@ export const getSearch: (state: State, searchId: string) => Search | null = (
   searchId
 ) => state.searches[searchId] || null;
 
-/* if an error has occurred returns a descriptive message about the error, 
+/* if an error has occurred returns a descriptive message about the error,
  * null otherwise
  */
 export const getError: (state: State, searchId: string) => string | null = (
@@ -54,7 +54,7 @@ export const getArticles: (
 };
 
 /* true if the searchId has more thumbnails not dowloaded,
- * false if search is not present or we have not finished to fetch search 
+ * false if search is not present or we have not finished to fetch search
  */
 export const hasMoreThumbnails: (state: State, searchId: string) => boolean = (
   state,
@@ -69,7 +69,7 @@ export const hasMoreThumbnails: (state: State, searchId: string) => boolean = (
 };
 
 /* true if it the application is fetching thumbnails of the search
- * identified by searchId 
+ * identified by searchId
  */
 export const isFetchingThumbnails: (
   state: State,

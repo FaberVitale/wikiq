@@ -1,4 +1,6 @@
 {
-  "parser": "babel-eslint",
-  "extends": "react-app"
+  "extends": ["react-app"],
+  "rules": {
+    "no-self-compare": 2
+  }
 }

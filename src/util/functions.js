@@ -22,21 +22,21 @@ export const identity = (id: mixed) => id;
 // provided here because IE11 doesnt have number isNaN
 /* eslint-disable no-self-compare*/
 export const isNaN = (val: mixed) => val !== val;
-/* eslint-enable no-self compare */
+/* eslint-enable no-self-compare */
 
 /* see: https://reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging
  */
 export const getDisplayName = (hocName: string, Comp: any) =>
   `With${hocName}(${Comp.displayName || Comp.name || "Component"})`;
 
-export type ComputeChangedBitsFactory<C: {}> = (
-  prop: Array<$Keys<C>>
-) => ComputeChangedBits<C>;
-
 export type ComputeChangedBits<Context> = (
   prev: Context,
   next: Context
 ) => number;
+
+export type ComputeChangedBitsFactory<C: {}> = (
+  prop: Array<$Keys<C>>
+) => ComputeChangedBits<C>;
 
 export const computeChangedBitsFactory: ComputeChangedBitsFactory<
   *

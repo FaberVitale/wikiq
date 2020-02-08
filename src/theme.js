@@ -61,7 +61,7 @@ export const dark = createMuiTheme({
 });
 
 /* properties shared between themes
- * we export them to avoid unnecessary class changes that occur 
+ * we export them to avoid unnecessary class changes that occur
  * when we switch between themes, if withStyles((theme) =>{}) is used
  */
 export const shadows = light.shadows;

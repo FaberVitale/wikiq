@@ -2,10 +2,10 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-/* applies overlay effect to the closest anchestor 
+/* applies overlay effect to the closest anchestor
  * that creates a stacking context (e.g. position: relative)
  * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
- * 
+ *
  * Props:
  *  - className
  *  - style
@@ -21,9 +21,7 @@ const style = theme => ({
     width: "100%",
     height: "100%",
     pointerEvents: "none",
-    background: `linear-gradient(to bottom,transparent 70%, ${
-      theme.palette.background.paper
-    })`
+    background: `linear-gradient(to bottom,transparent 70%, ${theme.palette.background.paper})`
   }
 });
 

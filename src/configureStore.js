@@ -1,20 +1,16 @@
 //@flow
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
 
-const configureStore = (function buildConfigureStore() {
+export default function configureStore() {
   const middleware = applyMiddleware(thunk);
 
-  if (process.env.NODE_ENV === "production") {
-    return () => createStore(reducer, middleware);
-  }
+  const composeEnhancers =
+    process.env.NODE_ENV !== "production" &&
+    typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === "function"
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : compose;
 
-  const reduxDevTool: Function | void =
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__();
-
-  return () => createStore(reducer, reduxDevTool, middleware);
-})();
-
-export default configureStore;
+  return createStore(reducer, composeEnhancers(middleware));
+}

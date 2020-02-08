@@ -91,11 +91,11 @@ class VirtualList extends React.PureComponent<Props> {
     }
 
     const len = data.length;
-    /* half rounded down is displayed below and 
+    /* half rounded down is displayed below and
      * half rounded up is displayed below
-     * 
+     *
      * it renders Math.min(len, inView + buffer)
-     * 
+     *
      * if from is 0 below === buffer, above = 0
      * if to is len above === buffer, below = 0
      */

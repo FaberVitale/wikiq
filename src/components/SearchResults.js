@@ -81,7 +81,7 @@ const renderPropArticles = props => {
     );
   }
 
-  /* render articles and BottomPage 
+  /* render articles and BottomPage
    * the child of BottomPage depends on the current State
    */
   let bottomPageChild;
@@ -173,9 +173,7 @@ class SearchResults extends React.Component<Props> {
   render() {
     const { lang, query, classes } = this.props;
 
-    const subheading = `${
-      LOCALES_TO_LANGUAGE[lang]
-    } Wikipedia, query: ${query}`;
+    const subheading = `${LOCALES_TO_LANGUAGE[lang]} Wikipedia, query: ${query}`;
 
     return (
       <article className={classes.root}>

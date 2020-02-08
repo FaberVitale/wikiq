@@ -276,7 +276,7 @@ export const thumbnails = {
   }
 };
 
-/* full redux stores that are snapshots of the app state during the request of 
+/* full redux stores that are snapshots of the app state during the request of
  * of search
  */
 export const search = {

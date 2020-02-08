@@ -3,7 +3,7 @@ import { noop } from "./functions";
 
 const environmentHasWindow = typeof window !== "undefined";
 
-/* https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement 
+/* https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
  * it can be null on server or if, somehow, the html page is empty
  * document.documentElement is read-only
  */

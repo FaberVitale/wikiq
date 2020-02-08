@@ -109,7 +109,7 @@ const fetchSearchAndThumbnails = (
 
     /* fetch thumbnails
      *   -> extract thumbnails if successful - emit a warning  otherwise
-     *        -> finally dispatch result 
+     *        -> finally dispatch result
      */
     fetchJSON(thumbnailURL)
       .then(onThumbnailsReceived, warn)
@@ -128,7 +128,7 @@ const fetchSearchAndThumbnails = (
   }
 };
 
-/* action creator that dispatches a thunk that will fetch Search and thumbnails 
+/* action creator that dispatches a thunk that will fetch Search and thumbnails
  * if necessary */
 export const requestSearch: (lang: string, query: string) => ThunkAction = (
   lang,
@@ -150,7 +150,7 @@ export const requestSearch: (lang: string, query: string) => ThunkAction = (
 };
 
 /* action creator that schedules a fetch of more thumbnails
- * if it is possible/allowed 
+ * if it is possible/allowed
  */
 export const requestMoreThumbnails: (
   lang: string,

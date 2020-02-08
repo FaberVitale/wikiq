@@ -11,8 +11,8 @@ import { $localStorage } from "../util/dom";
  * signature:
  *  reducer: a valid reducer,
  *  key: used to request the initial State,
- *  options: 
- *    storage: an object that has getItem function, 
+ *  options:
+ *    storage: an object that has getItem function,
  *      defaults to localStore if present
  *    onValue: a function that given the string value recieved applies
  *      a transformation in order to deserialize the state,

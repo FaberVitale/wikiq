@@ -34,7 +34,7 @@ type Props = ContextProps &
  *  - if error != null -> an error has occurred, do not load data
  *  - if error == null && data != null data has been fetched
  *  - if error == null && data == null invokes load
- * 
+ *
  *  - if data has been fetched and !isLoadingMore and hasMore
  *    and if viewportHeight + the amount scrolled is >= 80% of the overall height
  *    of the items, call loadMore

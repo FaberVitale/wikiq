@@ -19,8 +19,8 @@ export const bitmask = {
 
 Object.freeze(bitmask);
 
-/* Default context value: Consumers will return this value if 
- * Provider isn't an anchestor of Consumer or if window or 
+/* Default context value: Consumers will return this value if
+ * Provider isn't an anchestor of Consumer or if window or
  * window.document.documentElement is not defined
  */
 export const defaultViewport: Viewport = {
@@ -30,9 +30,9 @@ export const defaultViewport: Viewport = {
 
 Object.freeze(defaultViewport);
 
-const computeChangedBits: ComputeChangedBits<
-  Viewport
-> = computeChangedBitsFactory(["viewportWidth", "viewportHeight"]);
+const computeChangedBits: ComputeChangedBits<Viewport> = computeChangedBitsFactory(
+  ["viewportWidth", "viewportHeight"]
+);
 
 // $FlowFixMe - Flow( flow-bin 0.72.0) hasnt updated the definitions of React
 const { Provider, Consumer } = React.createContext(
@@ -53,7 +53,7 @@ const getViewport: () => Viewport = () => {
   };
 };
 
-/* Component that holds the context, 
+/* Component that holds the context,
  * it uses a throttled  listener to triggers
  * updates of context on resize and on orientationchange
  */
@@ -72,9 +72,9 @@ export const ViewportProvider = class ScrollProvider extends React.Component<
       const nextViewport = getViewport();
 
       /* Update only if and only if a property has changed:
-     * this new context api uses reference equality to check if
-     * Consumers should re-render
-     */
+       * this new context api uses reference equality to check if
+       * Consumers should re-render
+       */
       if (computeChangedBits(this.state.context, nextViewport) > 0) {
         this.setState({ context: nextViewport });
       }
