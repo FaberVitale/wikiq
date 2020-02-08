@@ -90,10 +90,8 @@ export const transformSearch: (
   const len = titles.length;
 
   for (let i = 0; i < len; i++) {
-    if (descriptions[i]) {
       articles.push(makeArticleInfo(titles[i], descriptions[i], links[i]));
       ids.push(makeArticleId(lang, titles[i]));
-    }
   }
 
   return {
