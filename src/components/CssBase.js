@@ -52,6 +52,11 @@ const styles = theme => ({
       // display children non removed from the flow below the appBar
       paddingTop: APPBAR_MIN_HEIGHT
     },
+    // Removes white background on Safari
+    'input[type="search"]': {
+      "-webkit-appearance": "none !important"
+    },
+
     /* hide chrome and ie11 clear button */
     'input[type="search"]::-webkit-search-cancel-button': {
       "-webkit-appearance": "none"

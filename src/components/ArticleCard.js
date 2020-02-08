@@ -153,7 +153,7 @@ class ArticleCard extends React.Component<Props, State> {
       <section className={classes.card}>
         <div className={classes.content}>
           <div className={classes.text}>
-            <OverflowFade />
+            {article.info.description && <OverflowFade />}
             <ExtLink className={classes.titleLink} href={info.link}>
               <Typography
                 variant="title"
