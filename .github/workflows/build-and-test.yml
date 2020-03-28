@@ -1,8 +1,8 @@
 # This workflow will do a clean install of node dependencies,
-# build the source code and run tests
+# build the source code and run tests.
 # see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Build and test
 
 on:
   push:
