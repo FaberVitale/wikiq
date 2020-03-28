@@ -5,10 +5,10 @@ import React from "react";
 
 describe("src/containers/Scroll", () => {
   let wrapper;
-  let LogProps = (mask = bitmask.ALL) => props => {
+  let LogProps = (mask = bitmask.ALL) => (props) => {
     return (
       <ScrollConsumer unstable_observedBits={mask}>
-        {context => JSON.stringify(context)}
+        {(context) => JSON.stringify(context)}
       </ScrollConsumer>
     );
   };

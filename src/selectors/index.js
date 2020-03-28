@@ -4,7 +4,7 @@ import { fetchStates } from "../reducers";
 import type { WikiArticle, Theme } from "../reducers";
 
 /* returns the theme picked  */
-export const getTheme: (state: State) => Theme = state => state.theme;
+export const getTheme: (state: State) => Theme = (state) => state.theme;
 
 /* returns the search object that has key searchId, if present, null otherwise */
 export const getSearch: (state: State, searchId: string) => Search | null = (
@@ -47,7 +47,7 @@ export const getArticles: (
 
     res.push({
       info: state.articles[id],
-      thumbnail: state.thumbnails[id] || null
+      thumbnail: state.thumbnails[id] || null,
     });
   }
   return res;

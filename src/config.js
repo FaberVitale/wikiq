@@ -15,7 +15,7 @@ export const LOCALES = [
   "ja",
   "ceb",
   "vi",
-  "war"
+  "war",
 ];
 /* maps locales to adjective */
 export const LOCALES_TO_LANGUAGE = {
@@ -32,13 +32,13 @@ export const LOCALES_TO_LANGUAGE = {
   ja: "Japanese",
   ceb: "Cebuano",
   war: "Waray-Waray",
-  vi: "Vietnamese"
+  vi: "Vietnamese",
 };
 
 // Routes of this application
 export const routes = {
   home: "/",
-  search: `/:lang(${LOCALES.join("|")})/:query(\\S.*)`
+  search: `/:lang(${LOCALES.join("|")})/:query(\\S.*)`,
 };
 
 //dom element where ReactDOM mounts the application

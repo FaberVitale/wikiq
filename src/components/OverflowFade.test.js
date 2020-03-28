@@ -7,7 +7,7 @@ describe("src/components/OverflowFade", () => {
   const shallow = createShallow();
   let wrapper;
 
-  it("renders without crashing", done => {
+  it("renders without crashing", (done) => {
     const div = document.createElement("div");
 
     const cleanUp = (div, done) => {

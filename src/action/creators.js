@@ -6,7 +6,7 @@ import {
   FAILED_TO_FETCH_SEARCH,
   FAILED_TO_FETCH_THUMBNAILS,
   STORE_THUMBNAILS,
-  FETCH_THUMBNAILS
+  FETCH_THUMBNAILS,
 } from "./types";
 import type { ChangeThemeAction, Dispatch, ThunkAction } from "./types";
 import {
@@ -16,36 +16,36 @@ import {
   fetchJSON,
   transformSearch,
   getThumbnailURL,
-  extractThumbnails
+  extractThumbnails,
 } from "../util/query";
 import {
   shouldFetchSearch,
   hasMoreThumbnails,
   isFetchingThumbnails,
-  getTheme
+  getTheme,
 } from "../selectors";
 import {
   OPEN_SEARCH_LIMIT,
   PAGINATION_SIZE,
   THUMBNAIL_WIDTH,
-  CARD_SIDE
+  CARD_SIDE,
 } from "../config";
 import { warn } from "../util/functions";
 import debounce from "lodash.debounce";
 import { $localStorage } from "../util/dom";
 
 export const changeTheme: () => ChangeThemeAction = () => ({
-  type: CHANGE_THEME
+  type: CHANGE_THEME,
 });
 
 export const fetchSearch = (searchId: string) => ({
   type: FETCH_SEARCH,
-  searchId
+  searchId,
 });
 
 export const fetchThumbnails = (searchId: string) => ({
   type: FETCH_THUMBNAILS,
-  searchId
+  searchId,
 });
 
 export const storeSearch = (lang: string, searchId: string, data: any) => ({
@@ -53,24 +53,24 @@ export const storeSearch = (lang: string, searchId: string, data: any) => ({
   searchId,
   articles: data.articles,
   ids: data.ids,
-  thumbnails: data.thumbnails
+  thumbnails: data.thumbnails,
 });
 
 export const failedToFetchSearch = (searchId: string, error: mixed) => ({
   type: FAILED_TO_FETCH_SEARCH,
   searchId,
-  error
+  error,
 });
 
 export const failedToFetchThumbnails = (searchId: string) => ({
   type: FAILED_TO_FETCH_THUMBNAILS,
-  searchId
+  searchId,
 });
 
 export const storeThumbnails = (searchId: string, thumbnails: any) => ({
   type: STORE_THUMBNAILS,
   searchId,
-  thumbnails
+  thumbnails,
 });
 
 /* function that fetches the open search and the first PAGINATION_SIZE thumbnails */
@@ -82,22 +82,22 @@ const fetchSearchAndThumbnails = (
 ) => {
   const searchURL = getOpenSearchURL(lang, escapedQuery, OPEN_SEARCH_LIMIT);
 
-  const onSearchNotReceived = e => {
+  const onSearchNotReceived = (e) => {
     warn("Unable to fetch search\n", e);
     dispatch(failedToFetchSearch(searchId, e));
   };
 
-  const onSearchReceived = data => {
+  const onSearchReceived = (data) => {
     const { articles, ids } = transformSearch(lang, data);
     let thumbnails = {};
 
     const titles = articles
       .slice(0, PAGINATION_SIZE)
-      .map(article => article.title);
+      .map((article) => article.title);
 
     const thumbnailURL = getThumbnailURL(lang, titles, THUMBNAIL_WIDTH);
 
-    const onThumbnailsReceived = json => {
+    const onThumbnailsReceived = (json) => {
       if (json && json.query && json.query.pages) {
         thumbnails = extractThumbnails(lang, json.query.pages);
       }
@@ -193,7 +193,7 @@ const onLoadMoreThumbnailsSuccess = (
   dispatch: Dispatch,
   lang: string,
   searchId: string
-) => data => {
+) => (data) => {
   let receivedThumbnails = {};
 
   if (data && data.query && data.query.pages) {
@@ -207,7 +207,7 @@ const onLoadMoreThumbnailsFail = (
   dispatch: Dispatch,
   lang: string,
   searchId: string
-) => err => {
+) => (err) => {
   warn(
     `Unable to Load More  thumbnails: lang - ${lang} searchId -  ${searchId}\n`,
     err
@@ -237,7 +237,7 @@ const loadMoreThumbnails: (lang: string, searchId: string) => ThunkAction = (
 
     const titles = ids
       .slice(thumbnails, thumbnails + PAGINATION_SIZE)
-      .map(id => state.articles[id].title);
+      .map((id) => state.articles[id].title);
 
     const thumbnailURL = getThumbnailURL(lang, titles, CARD_SIDE);
 
@@ -260,7 +260,7 @@ const persistTheme = debounce(
   { leading: false }
 );
 
-export const requestChangeTheme: () => ThunkAction = theme => {
+export const requestChangeTheme: () => ThunkAction = (theme) => {
   return (dispatch: Dispatch, getState) => {
     dispatch(changeTheme());
 

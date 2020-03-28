@@ -27,8 +27,8 @@ const styles = {
     transition: "transform 150ms ease-out",
     //points to bottom when select has focus
     "select:focus + &": {
-      transform: "rotate(0deg)"
-    }
+      transform: "rotate(0deg)",
+    },
   },
   root: {
     //stacking context for iconContainer
@@ -38,7 +38,7 @@ const styles = {
     width: 64,
     backgroundColor: "transparent",
     border: 0,
-    padding: "0 2px"
+    padding: "0 2px",
   },
   select: {
     outline: 0,
@@ -59,22 +59,22 @@ const styles = {
     appearance: "none",
     //hide arrow for IE11
     "&::-ms-expand": {
-      display: "none"
+      display: "none",
     },
     "&:focus": {
-      outline: "none !important"
+      outline: "none !important",
     },
     "&:-moz-focusring": {
       color: "white",
       outline: 0,
       border: 0,
       textShadow: "0 0 0 #000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   option: {
-    color: "black"
-  }
+    color: "black",
+  },
 };
 
 const Options = pure(({ options, className }) =>
@@ -90,13 +90,13 @@ type Props = {
   options: Array<string>,
   id?: string,
   value: number,
-  onChange: (evt: SyntheticInputEvent<*>) => void
+  onChange: (evt: SyntheticInputEvent<*>) => void,
 };
 
 class Select extends React.Component<Props> {
   static defaultProps = {
     options: [],
-    handleChange: noop
+    handleChange: noop,
   };
 
   selectRef = React.createRef();

@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 
 describe("src/container/InfiniteScroller", () => {
   let wrapper;
-  const logProps = jest.fn(props => JSON.stringify(props));
+  const logProps = jest.fn((props) => JSON.stringify(props));
   const load = jest.fn();
   const loadMore = jest.fn();
 
@@ -18,15 +18,15 @@ describe("src/container/InfiniteScroller", () => {
     hasMore: false,
     scrollY: 0,
     viewportHeight: 1080,
-    render: logProps
+    render: logProps,
   };
 
   const props = {
     idle: baseProps,
     error: {
       ...baseProps,
-      error: { message: "oops!" }
-    }
+      error: { message: "oops!" },
+    },
   };
 
   afterEach(() => {
@@ -35,7 +35,7 @@ describe("src/container/InfiniteScroller", () => {
     loadMore.mockClear();
   });
 
-  it("renders without crashing", done => {
+  it("renders without crashing", (done) => {
     const { scrollY, viewportHeight, ...testRenderProps } = props.idle;
     const div = document.createElement("div");
 

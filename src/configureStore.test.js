@@ -2,7 +2,7 @@ import configureStore from "./configureStore";
 import { initState } from "./fixtures/reducers";
 
 describe("src/configureStore", () => {
-  const isAReduxStore = store => {
+  const isAReduxStore = (store) => {
     return (
       !!store &&
       typeof store === "object" &&
@@ -27,7 +27,7 @@ describe("src/configureStore", () => {
 
     expect(stores.every(isAReduxStore)).toBe(true);
 
-    stores.forEach(store => {
+    stores.forEach((store) => {
       expect(store.getState()).toEqual(initState);
     });
   });

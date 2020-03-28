@@ -15,13 +15,13 @@ import throttle from "lodash.throttle";
 import {
   CHANGE_THEME_THROTTLE_TIME,
   ERROR_MESSAGE,
-  APPBAR_MIN_HEIGHT
+  APPBAR_MIN_HEIGHT,
 } from "../config";
 import ErrorMessage from "../components/ErrorMessage";
 import Loadable from "react-loadable";
 
 const mapStateToProps = (state: State) => ({
-  theme: getTheme(state)
+  theme: getTheme(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -29,22 +29,22 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     compose(dispatch, requestChangeTheme),
     CHANGE_THEME_THROTTLE_TIME,
     { trailing: false }
-  )
+  ),
 });
 
 type Props = {
   theme: string,
-  toggleTheme: () => void
+  toggleTheme: () => void,
 };
 
 const Main = Loadable({
   loader: () => import("./Main"),
-  loading: props =>
+  loading: (props) =>
     props.error ? (
       <ErrorMessage style={{ marginTop: APPBAR_MIN_HEIGHT + 16 }}>
         {ERROR_MESSAGE}
       </ErrorMessage>
-    ) : null
+    ) : null,
 });
 
 class App extends React.Component<Props> {

@@ -7,7 +7,7 @@ import type { Viewport } from "./Viewport";
 
 type ContextProps = {
   scrollY: number,
-  viewportHeight: number
+  viewportHeight: number,
 };
 
 type InfiniteScrollerPassThroughProps = {
@@ -17,11 +17,11 @@ type InfiniteScrollerPassThroughProps = {
   load: () => void,
   loadMore: () => void,
   isLoadingMore: boolean,
-  hasMore: boolean
+  hasMore: boolean,
 };
 
 type InfiniteScrollerInternalProps = {
-  render: (props: Object) => React.Node
+  render: (props: Object) => React.Node,
 };
 
 type Props = ContextProps &
@@ -50,7 +50,7 @@ class InfiniteScroller extends React.Component<Props> {
       viewportHeight,
       itemHeight,
       load,
-      loadMore
+      loadMore,
     } = this.props;
 
     const shouldLoadSearch = data == null && error == null;

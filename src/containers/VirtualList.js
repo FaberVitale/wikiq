@@ -9,15 +9,15 @@ type Props = {
   viewportHeight: number,
   offsetTop: number,
   buffer: number,
-  data: Array<mixed>
+  data: Array<mixed>,
 };
 
 const styles = {
   itemBase: {
     position: "absolute",
     width: "100%",
-    left: 0
-  }
+    left: 0,
+  },
 };
 
 const renderList = (
@@ -39,7 +39,7 @@ const renderList = (
     const style = {
       ...styles.itemBase,
       top: i * itemHeight,
-      height: itemHeight
+      height: itemHeight,
     };
 
     list.push(
@@ -59,7 +59,7 @@ class VirtualList extends React.PureComponent<Props> {
   static defaultProps = {
     buffer: 10,
     itemHeight: 50,
-    offsetTop: 0
+    offsetTop: 0,
   };
 
   rootRef = React.createRef();
@@ -115,7 +115,7 @@ class VirtualList extends React.PureComponent<Props> {
 
     const containerStyle = {
       position: "relative",
-      height: len * itemHeight
+      height: len * itemHeight,
     };
 
     return (

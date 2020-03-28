@@ -11,7 +11,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
  *  - style
  *  - other undocumented props are applied to the root element
  */
-const style = theme => ({
+const style = (theme) => ({
   overlay: {
     display: "block",
     position: "absolute",
@@ -21,13 +21,13 @@ const style = theme => ({
     width: "100%",
     height: "100%",
     pointerEvents: "none",
-    background: `linear-gradient(to bottom,transparent 70%, ${theme.palette.background.paper})`
-  }
+    background: `linear-gradient(to bottom,transparent 70%, ${theme.palette.background.paper})`,
+  },
 });
 
 type Props = {
   classes: MUIClasses,
-  className: string
+  className?: ?string,
 };
 
 class OverflowFade extends React.Component<Props> {

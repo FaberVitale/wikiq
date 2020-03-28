@@ -14,11 +14,11 @@ describe("src/containers/SearchForm", () => {
     bubbles: true,
     cancellable: false,
     target: {
-      value
-    }
+      value,
+    },
   });
 
-  const view = jest.fn(props => {
+  const view = jest.fn((props) => {
     // grab handlers and state passsed
     viewProps.push(props);
 
@@ -82,7 +82,7 @@ describe("src/containers/SearchForm", () => {
     const initRoute = "/";
     let route = initRoute;
     let handlers = {};
-    const ListenRoute = withRouter(props => {
+    const ListenRoute = withRouter((props) => {
       route = props.location.pathname;
       return null;
     });
@@ -92,7 +92,7 @@ describe("src/containers/SearchForm", () => {
         <div>
           <ListenRoute />
           <SearchForm
-            view={props => {
+            view={(props) => {
               handlers = props.handlers;
               return null;
             }}

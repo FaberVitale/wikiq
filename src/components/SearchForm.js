@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Select from "./Select";
 import type { ViewProps } from "../containers/SearchForm";
 
-const style = theme => ({
+const style = (theme) => ({
   form: {
     display: "flex",
     flexFlow: "row nowrap",
@@ -17,12 +17,12 @@ const style = theme => ({
     borderRadius: 8,
     backgroundColor: theme.palette.primary.dark,
     [theme.breakpoints.down("xs")]: {
-      flex: 1
-    }
+      flex: 1,
+    },
   },
   button: {
     color: theme.palette.primary.contrastText,
-    height: 32
+    height: 32,
   },
   input: {
     backgroundColor: "transparent",
@@ -33,20 +33,20 @@ const style = theme => ({
     height: 24,
     fontSize: "1em",
     [theme.breakpoints.down("xs")]: {
-      width: "100%"
+      width: "100%",
     },
     // set placeholder color for chrome & FF
     "&::placeholder": {
-      color: "rgba(255, 255, 255, 0.6)"
+      color: "rgba(255, 255, 255, 0.6)",
     },
     //for IE 11
     "&:-ms-input-placeholder": {
-      color: "rgba(255, 255, 255, 0.6) !important"
+      color: "rgba(255, 255, 255, 0.6) !important",
     },
     //for Edge
     "&::-ms-input-placeholder": {
-      color: "rgba(255, 255, 255, 0.6) !important"
-    }
+      color: "rgba(255, 255, 255, 0.6) !important",
+    },
   },
   offScreen: {
     width: 1,
@@ -55,7 +55,7 @@ const style = theme => ({
     overflow: "hidden",
     border: 0,
     outline: 0,
-    position: "absolute"
+    position: "absolute",
   },
   clear: {
     height: 24,
@@ -63,47 +63,47 @@ const style = theme => ({
     color: theme.palette.primary.contrastText,
     "& > span > svg": {
       width: 24,
-      height: 24
-    }
+      height: 24,
+    },
   },
   formControls: {
     display: "flex",
     flexFlow: "row nowrap",
     [theme.breakpoints.down("xs")]: {
-      flex: 1
-    }
+      flex: 1,
+    },
   },
   inputContainer: {
     display: "inline-block",
     minWidth: 60,
     [theme.breakpoints.down("xs")]: {
-      flex: 1
-    }
-  }
+      flex: 1,
+    },
+  },
 });
 
 type Props = ViewProps & {
-  classes: MUIClasses
+  classes: MUIClasses,
 };
 
 /* applied to the clear button when input.value.length === 0 */
 const hiddenStyle = {
-  visibility: "hidden"
+  visibility: "hidden",
 };
 
 class SearchForm extends React.Component<Props> {
   inputRef: ?HTMLElement; // input[type="search"] ref
   submitRef: ?HTMLElement; // button[type="submit"] ref
 
-  getInputRef = elem => {
+  getInputRef = (elem) => {
     this.inputRef = elem;
   };
 
-  getSubmitRef = elem => {
+  getSubmitRef = (elem) => {
     this.submitRef = elem;
   };
 
-  handleSubmit = evt => {
+  handleSubmit = (evt) => {
     evt.preventDefault();
 
     if (this.submitRef) {
@@ -112,7 +112,7 @@ class SearchForm extends React.Component<Props> {
     this.props.handlers.submit();
   };
 
-  handleClear = evt => {
+  handleClear = (evt) => {
     if (this.inputRef) {
       this.inputRef.focus();
     }

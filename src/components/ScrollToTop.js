@@ -8,7 +8,7 @@ import type { Scroll } from "../containers/Scroll";
 type Props = {
   location: Location,
   scrollTo: (xOrOptions: number | {}, y?: number) => void,
-  scrollY: number
+  scrollY: number,
 };
 
 /* components that scrolls to (0,0) on location.pathname change
@@ -28,7 +28,7 @@ class ScrollToTop extends React.Component<Props> {
   }
 }
 
-export default withRouter(props => (
+export default withRouter((props) => (
   <ScrollConsumer unstable_observedBits={scrollMask.SCROLL_Y}>
     {({ scrollY }: Scroll) => <ScrollToTop scrollY={scrollY} {...props} />}
   </ScrollConsumer>

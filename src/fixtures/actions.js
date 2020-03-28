@@ -6,23 +6,23 @@ export const lang = "en";
 export const searchId = "en/rem";
 
 const actionSearchId = {
-  searchId
+  searchId,
 };
 
 export const error = { message: "oops!" };
 
 export const fetchSearch = {
   ...actionSearchId,
-  type: actionTypes.FETCH_SEARCH
+  type: actionTypes.FETCH_SEARCH,
 };
 export const fetchThumbnails = {
   ...actionSearchId,
-  type: actionTypes.FETCH_THUMBNAILS
+  type: actionTypes.FETCH_THUMBNAILS,
 };
 export const failedToFetch = {
   ...actionSearchId,
   type: actionTypes.FAILED_TO_FETCH_SEARCH,
-  error
+  error,
 };
 
 export const storeSearch = {
@@ -36,16 +36,16 @@ export const storeSearch = {
     }
     return aggr;
   }, {}),
-  ids
+  ids,
 };
 
 export const storeThumbnails = {
   ...actionSearchId,
-  type: actionTypes.STORE_THUMBNAILS
+  type: actionTypes.STORE_THUMBNAILS,
 };
 export const failedToFetchThumbnails = {
   ...actionSearchId,
-  type: actionTypes.FAILED_TO_FETCH_THUMBNAILS
+  type: actionTypes.FAILED_TO_FETCH_THUMBNAILS,
 };
 export const changeTheme = { type: actionTypes.CHANGE_THEME };
 export const unknown = { type: "@@UNKNOWN" };

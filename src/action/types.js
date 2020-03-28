@@ -25,18 +25,18 @@ export const FAILED_TO_FETCH_THUMBNAILS: FailedToFetchThumbnailsType =
 export const FETCH_THUMBNAILS: FetchThumbnailsType = "FETCH_THUMBNAILS";
 
 export type ChangeThemeAction = {|
-  +type: ChangeThemeType
+  +type: ChangeThemeType,
 |};
 
 export type FetchSearchAction = {|
   +type: FetchSearchType,
-  +searchId: string
+  +searchId: string,
 |};
 
 export type FailedToFetchSearchAction = {|
   +type: FailedToFetchSearchType,
   +searchId: string,
-  +error: mixed
+  +error: mixed,
 |};
 
 export type StoreSearchAction = {|
@@ -44,23 +44,23 @@ export type StoreSearchAction = {|
   +searchId: string,
   +articles: Array<WikiArticleInfo>,
   +ids: Array<string>,
-  +thumbnails: { [id: String]: Thumbnail }
+  +thumbnails: { [id: String]: Thumbnail },
 |};
 
 export type FailedToFetchThumbnailsAction = {|
   +type: FailedToFetchThumbnailsType,
-  +searchId: string
+  +searchId: string,
 |};
 
 export type StoreThumbnailsAction = {|
   +type: StoreThumbnailsType,
   +searchId: string,
-  +thumbnails: { [id: String]: Thumbnail }
+  +thumbnails: { [id: String]: Thumbnail },
 |};
 
 export type FetchThumbnailsAction = {|
   +type: FetchThumbnailsType,
-  +searchId: string
+  +searchId: string,
 |};
 
 export type Action =

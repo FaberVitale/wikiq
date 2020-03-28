@@ -4,7 +4,7 @@ import {
   getArticles,
   getError,
   hasMoreThumbnails,
-  isFetchingThumbnails
+  isFetchingThumbnails,
 } from "../selectors";
 import { makeSearchId } from "../util/query";
 import { requestSearch, requestMoreThumbnails } from "../action/creators";
@@ -17,12 +17,12 @@ import type { Node, ComponentType } from "react";
 type ConnectProps = {
   lang: string,
   query: string,
-  itemHeight: number
+  itemHeight: number,
 };
 
 /* Props expected */
 type IncomingProps = ConnectProps & {
-  render: (props: Object) => Node
+  render: (props: Object) => Node,
 };
 
 const mapStateToProps = (state: State, { lang, query }: ConnectProps) => {
@@ -32,7 +32,7 @@ const mapStateToProps = (state: State, { lang, query }: ConnectProps) => {
     data: getArticles(state, searchId),
     error: getError(state, searchId),
     hasMore: hasMoreThumbnails(state, searchId),
-    isLoadingMore: isFetchingThumbnails(state, searchId)
+    isLoadingMore: isFetchingThumbnails(state, searchId),
   };
 };
 
@@ -42,7 +42,7 @@ const mapDispatchToProps = (
 ) => ({
   load: () => dispatch(requestSearch(lang, query)),
   loadMore: () =>
-    dispatch(requestMoreThumbnails(lang, makeSearchId(lang, query)))
+    dispatch(requestMoreThumbnails(lang, makeSearchId(lang, query))),
 });
 
 const connectOptions = {
@@ -51,7 +51,7 @@ const connectOptions = {
   areOwnPropsEqual: (next: ConnectProps, prev: ConnectProps) =>
     next.lang === prev.lang &&
     next.query === prev.query &&
-    next.itemHeight === prev.itemHeight
+    next.itemHeight === prev.itemHeight,
 };
 
 /* cast in order to make IncomingProps required */

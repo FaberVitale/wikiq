@@ -12,7 +12,7 @@ import ExtLink from "./ExtLink";
 /* optimization: instad of calling withStyles N times HOC,
  *  we export it in order to inject props.classes through
  * the Component that renders ArticleCard */
-export const classes = withStyles(theme => ({
+export const classes = withStyles((theme) => ({
   card: {
     height: CARD_SIDE,
     minWidth: CARD_SIDE,
@@ -22,17 +22,17 @@ export const classes = withStyles(theme => ({
     overflow: "hidden",
     background: theme.palette.background.paper,
     boxShadow: theme.shadows[2],
-    borderRadius: 2
+    borderRadius: 2,
   },
   content: {
     flex: 1,
     height: "100%",
-    padding: 8
+    padding: 8,
   },
   heading: {
     "*:focus > &": {
-      color: theme.palette.background.paper
-    }
+      color: theme.palette.background.paper,
+    },
   },
   cardActions: {
     height: "10%",
@@ -41,7 +41,7 @@ export const classes = withStyles(theme => ({
     justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
-    padding: "0 16px"
+    padding: "0 16px",
   },
   cardMedia: {
     minHeight: CARD_SIDE,
@@ -52,13 +52,13 @@ export const classes = withStyles(theme => ({
     //some thumbnail has trasparency and was meant to be displayed on a white
     //background (wikipedia standard page)
     backgroundColor: "#ffffff",
-    transform: "translate3d(0, 0, 0)"
+    transform: "translate3d(0, 0, 0)",
   },
   text: {
     height: "90%",
     padding: 16,
     overflow: "hidden",
-    position: "relative" // required to use OverflowFade correctly
+    position: "relative", // required to use OverflowFade correctly
   },
   titleLink: {
     display: "inline-block",
@@ -71,8 +71,8 @@ export const classes = withStyles(theme => ({
     outline: "none",
     "&:focus": {
       backgroundColor: theme.palette.secondary.main,
-      color: theme.palette.background.paper
-    }
+      color: theme.palette.background.paper,
+    },
   },
   bottomLink: {
     display: "inline-block",
@@ -85,36 +85,36 @@ export const classes = withStyles(theme => ({
     fontSize: 14,
     "&:focus": {
       backgroundColor: theme.palette.secondary.main,
-      color: theme.palette.background.paper
-    }
-  }
+      color: theme.palette.background.paper,
+    },
+  },
 }));
 
 type Props = {
   lang: string,
   article: WikiArticle,
-  classes: MUIClasses
+  classes: MUIClasses,
 };
 
 type State = {
   lang: string,
   title: string,
   googleLink: string,
-  pdfLink: string
+  pdfLink: string,
 };
 
 // text of the ext links
 const labels = {
   page: "Link",
   pdf: "Pdf",
-  google: "Google"
+  google: "Google",
 };
 
 const getDerivedState: (props: Props) => State = ({ article, lang }) => ({
   lang,
   title: article.info.title,
   pdfLink: getPDFLink(lang, slugify(article.info.title)),
-  googleLink: getGoogleSearchLink(article.info.title)
+  googleLink: getGoogleSearchLink(article.info.title),
 });
 
 class ArticleCard extends React.Component<Props, State> {

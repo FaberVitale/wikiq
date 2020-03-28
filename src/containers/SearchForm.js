@@ -11,12 +11,12 @@ const submit = (push: (urlSegment: string) => void) => (
 ) => push(makeSearchId(LOCALES[index], query));
 
 const addSubmit = withHandlers({
-  submit: ({ history }) => submit(history.push)
+  submit: ({ history }) => submit(history.push),
 });
 
 type State = {
   index: number,
-  input: string
+  input: string,
 };
 
 //props passed to the view component
@@ -27,19 +27,19 @@ export type ViewProps = {
     inputChange: (evt: SyntheticInputEvent<*>) => void,
     selectChange: (evt: SyntheticInputEvent<*>) => void,
     clear: (evt: mixed) => void,
-    submit: (evt: mixed) => void
-  }
+    submit: (evt: mixed) => void,
+  },
 };
 
 type Props = {
   submit: (index: number, input: string) => void,
-  view: React.ComponentType<ViewProps>
+  view: React.ComponentType<ViewProps>,
 };
 
 class FormState extends React.Component<Props, State> {
   state = {
     index: 0,
-    input: ""
+    input: "",
   };
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -62,7 +62,7 @@ class FormState extends React.Component<Props, State> {
     }
 
     this.setState({
-      index: num
+      index: num,
     });
   };
 
@@ -74,14 +74,14 @@ class FormState extends React.Component<Props, State> {
     }
 
     this.setState({
-      input: nextInput
+      input: nextInput,
     });
   };
 
   handleClear = (evt: mixed) => {
     if (this.state.input) {
       this.setState({
-        input: ""
+        input: "",
       });
     }
   };
@@ -100,14 +100,14 @@ class FormState extends React.Component<Props, State> {
     inputChange: this.handleInputChange,
     clear: this.handleClear,
     selectChange: this.handleSelectChange,
-    submit: this.handleSubmit
+    submit: this.handleSubmit,
   };
 
   render() {
     const viewProps: ViewProps = {
       state: { ...this.state },
       options: LOCALES,
-      handlers: this.handlers
+      handlers: this.handlers,
     };
 
     return React.createElement(this.props.view, viewProps);

@@ -19,7 +19,7 @@ describe("src/reducers/search", () => {
     it("stores thumbnails if STORE_SEARCH or STORE_THUMBNAILS are passed", () => {
       const action = {
         type: actionTypes.STORE_SEARCH,
-        thumbnails: search.fetched.thumbnails
+        thumbnails: search.fetched.thumbnails,
       };
 
       expect(reducers.thumbnails(initState.thumbnails, action)).toEqual(
@@ -29,7 +29,7 @@ describe("src/reducers/search", () => {
       expect(
         reducers.thumbnails(initState.thumbnails, {
           ...action,
-          type: actionTypes.STORE_THUMBNAILS
+          type: actionTypes.STORE_THUMBNAILS,
         })
       ).toEqual(action.thumbnails);
     });
@@ -49,11 +49,11 @@ describe("src/reducers/search", () => {
         const expected = search.fetched.articles;
 
         const ids = search.fetched.searches["en/rem"].ids;
-        const articlesArray = ids.map(id => expected[id]);
+        const articlesArray = ids.map((id) => expected[id]);
         const action = {
           type: actionTypes.STORE_SEARCH,
           ids,
-          articles: articlesArray
+          articles: articlesArray,
         };
 
         expect(reducers.articles(initState.articles, action)).toEqual(expected);
@@ -83,7 +83,7 @@ describe("src/reducers/search", () => {
       it("sets state to fetching if FETCH_STATE action is passed", () => {
         const expected = {
           ...initSearch,
-          fetchState: reducers.fetchStates.REQUESTED_SEARCH
+          fetchState: reducers.fetchStates.REQUESTED_SEARCH,
         };
 
         expect(reducers.search(undefined, actions.fetchSearch)).toEqual(
@@ -105,7 +105,7 @@ describe("src/reducers/search", () => {
         const expected = {
           ...initSearch,
           fetchState: reducers.fetchStates.IDLE,
-          error: actions.error.message
+          error: actions.error.message,
         };
 
         expect(reducers.search(undefined, actions.failedToFetch)).toEqual(
@@ -123,7 +123,7 @@ describe("src/reducers/search", () => {
         const expected = {
           ...initSearch,
           fetchState: reducers.fetchStates.IDLE,
-          thumbnails: initSearch.thumbnails + PAGINATION_SIZE
+          thumbnails: initSearch.thumbnails + PAGINATION_SIZE,
         };
 
         expect(
@@ -136,7 +136,7 @@ describe("src/reducers/search", () => {
       it("sets the state to requested thumbnails if FETCH_THUMBNAILS action is passed", () => {
         const expected = {
           ...initSearch,
-          fetchState: reducers.fetchStates.REQUESTED_THUMBNAILS
+          fetchState: reducers.fetchStates.REQUESTED_THUMBNAILS,
         };
 
         expect(reducers.search(undefined, actions.fetchThumbnails)).toEqual(

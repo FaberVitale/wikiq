@@ -19,7 +19,7 @@ import {
   VIRTUAL_LIST_BUFFER,
   MAIN_PADDING,
   APPBAR_MIN_HEIGHT,
-  ARTICLE_PADDING
+  ARTICLE_PADDING,
 } from "../config";
 import BottomPage from "../components/BottomPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -45,7 +45,7 @@ const renderArticle = ({ lang, classes }, item) => (
 
 const WrappedVirtualList = classes(VirtualList);
 
-const renderPropArticles = props => {
+const renderPropArticles = (props) => {
   const {
     error,
     hasMore,
@@ -54,7 +54,7 @@ const renderPropArticles = props => {
     lang,
     loadMore,
     scrollY,
-    viewportHeight
+    viewportHeight,
   } = props;
 
   /* If an error has occorred display a message */
@@ -138,8 +138,8 @@ const styles = {
     // force the vert scrollbar
     minHeight: "101vh",
     [xsDown]: {
-      padding: "16px 0"
-    }
+      padding: "16px 0",
+    },
   },
   header: {
     // hide Flash of Unstyled Text, it happens in chrome
@@ -149,24 +149,24 @@ const styles = {
     animationFillMode: "both",
     width: "100%",
     marginBottom: headerMarginBottom,
-    height: headerHeight
+    height: headerHeight,
   },
   title: {
-    marginBottom: 16
-  }
+    marginBottom: 16,
+  },
 };
 
 /* extracts relevant props and removes other Route props */
 const filterProps = mapProps(({ match, classes }) => ({
   lang: match.params.lang,
   query: decodeComponent(match.params.query),
-  classes
+  classes,
 }));
 
 type Props = {
   lang: string,
   query: string,
-  classes: MUIClasses
+  classes: MUIClasses,
 };
 
 class SearchResults extends React.Component<Props> {

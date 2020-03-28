@@ -13,7 +13,7 @@ export type State = {|
   +theme: Theme,
   +searches: Searches,
   +articles: Articles,
-  +thumbnails: Thumbnails
+  +thumbnails: Thumbnails,
 |};
 
 export type { State as Theme } from "./theme";
@@ -22,9 +22,9 @@ export type { Search, Thumbnail, WikiArticle, WikiArticleInfo } from "./search";
 export default combineReducers({
   theme: storage(theme, "theme", {
     onValue: identity,
-    isValid: r => r === "light" || r === "dark"
+    isValid: (r) => r === "light" || r === "dark",
   }),
   searches,
   articles,
-  thumbnails
+  thumbnails,
 });

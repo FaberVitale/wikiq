@@ -8,23 +8,23 @@ type Props = {||};
  https://github.com/mui-org/material-ui/blob/v1-beta/src/CssBaseline/CssBaseline.js
  it adds touch action and changes marging and padding rules
  */
-const styles = theme => ({
+const styles = (theme) => ({
   "@global": {
     "@keyframes fadeIn": {
       from: { opacity: 0 },
-      to: { opacity: 1 }
+      to: { opacity: 1 },
     },
     html: {
       // Antialiasing.
       WebkitFontSmoothing: "antialiased",
-      MozOsxFontSmoothing: "grayscale"
+      MozOsxFontSmoothing: "grayscale",
     },
     "*, *::before, *::after": {
       // width/height = border + padding +  content
       boxSizing: "border-box",
       //remove default padding and margin
       margin: 0,
-      padding: 0
+      padding: 0,
     },
     body: {
       //stretch to cover the whole viewport
@@ -40,8 +40,8 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
       "@media print": {
         // Save printer ink.
-        backgroundColor: theme.palette.common.white
-      }
+        backgroundColor: theme.palette.common.white,
+      },
     },
     [`#${REACT_ROOT_ID}`]: {
       //the root of the react Dom has the same viewport of body
@@ -50,21 +50,21 @@ const styles = theme => ({
       // set root id as the stacking context
       position: "relative",
       // display children non removed from the flow below the appBar
-      paddingTop: APPBAR_MIN_HEIGHT
+      paddingTop: APPBAR_MIN_HEIGHT,
     },
     // Removes white background on Safari
     'input[type="search"]': {
-      "-webkit-appearance": "none !important"
+      "-webkit-appearance": "none !important",
     },
 
     /* hide chrome and ie11 clear button */
     'input[type="search"]::-webkit-search-cancel-button': {
-      "-webkit-appearance": "none"
+      "-webkit-appearance": "none",
     },
     'input[type="search"]::-ms-clear': {
-      display: "none"
-    }
-  }
+      display: "none",
+    },
+  },
 });
 
 class CssBase extends React.Component<Props> {

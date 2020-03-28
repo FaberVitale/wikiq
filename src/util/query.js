@@ -69,7 +69,7 @@ const makeArticleInfo: (
 ) => WikiArticleInfo = (title, description, link) => ({
   title,
   description,
-  link
+  link,
 });
 
 export const makeArticleId = (lang: string, title: string) =>
@@ -96,7 +96,7 @@ export const transformSearch: (
 
   return {
     articles,
-    ids
+    ids,
   };
 };
 

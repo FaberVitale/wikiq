@@ -3,7 +3,7 @@ import * as React from "react";
 import { BOTTOM_PAGE_HEIGHT, BOTTOM_PAGE_MARGIN_TOP } from "../config";
 
 type Props = {
-  children: React.Node
+  children: React.Node,
 };
 
 /* Component Placed after the infinite scroll section  */
@@ -16,12 +16,12 @@ class BottomPage extends React.Component<Props> {
       justifyContent: "center",
       marginTop: BOTTOM_PAGE_HEIGHT,
       height: BOTTOM_PAGE_MARGIN_TOP, // <-- !important, it has fixed height
-      overflow: "auto"
-    }
+      overflow: "auto",
+    },
   };
 
   static defaultProps = {
-    children: null
+    children: null,
   };
 
   render() {

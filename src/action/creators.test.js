@@ -18,7 +18,7 @@ describe("src/action/creators", () => {
       creators.storeSearch(actions.lang, actions.searchId, {
         ids,
         thumbnails,
-        articles
+        articles,
       })
     ).toEqual(actions.storeSearch);
 
@@ -33,7 +33,7 @@ describe("src/action/creators", () => {
     expect(creators.storeThumbnails(actions.searchId, data.thumbnails)).toEqual(
       {
         ...actions.storeThumbnails,
-        thumbnails: data.thumbnails
+        thumbnails: data.thumbnails,
       }
     );
   });

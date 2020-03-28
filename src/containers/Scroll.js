@@ -10,22 +10,22 @@ import type { ComputeChangedBits } from "../util/functions";
 export type Scroll = {
   +scrollX: number,
   +scrollY: number,
-  +isScrolling: boolean
+  +isScrolling: boolean,
 };
 
 type State = {
-  context: Scroll
+  context: Scroll,
 };
 
 type Props = {
-  children: React.Node
+  children: React.Node,
 };
 
 export const bitmask = {
   ALL: 7,
   SCROLL_X: 1,
   SCROLL_Y: 2,
-  IS_SCROLLING: 4
+  IS_SCROLLING: 4,
 };
 
 Object.freeze(bitmask);
@@ -36,7 +36,7 @@ Object.freeze(bitmask);
 export const defaultScroll: Scroll = {
   scrollX: 0,
   scrollY: 0,
-  isScrolling: false
+  isScrolling: false,
 };
 
 Object.freeze(defaultScroll);
@@ -64,7 +64,7 @@ const getScroll: (isScrolling?: boolean) => Scroll = (isScrolling = false) => {
   return {
     scrollX: typeof pageXOffset === "number" ? pageXOffset : $html.scrollLeft,
     scrollY: typeof pageYOffset === "number" ? pageYOffset : $html.scrollTop,
-    isScrolling
+    isScrolling,
   };
 };
 
@@ -79,7 +79,7 @@ export const ScrollProvider = class ScrollProvider extends React.Component<
   state = { context: getScroll() };
 
   static defaultProps = {
-    children: null
+    children: null,
   };
 
   scrollEnd: () => void = debounce(
@@ -88,8 +88,8 @@ export const ScrollProvider = class ScrollProvider extends React.Component<
         this.setState(({ context }: State) => ({
           context: {
             ...context,
-            isScrolling: false
-          }
+            isScrolling: false,
+          },
         }));
       }
     },

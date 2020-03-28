@@ -27,19 +27,19 @@ interface GetItem {
 type Options<S> = {
   storage: GetItem,
   isValid: (value: S) => boolean,
-  onValue: (value: string) => S
+  onValue: (value: string) => S,
 };
 
 const fauxStorage: GetItem = {
   getItem() {
     return null;
-  }
+  },
 };
 
 const defOptions: Options<any> = {
   storage: $localStorage != null ? $localStorage : fauxStorage,
-  isValid: anyVal => true,
-  onValue: JSON.parse
+  isValid: (anyVal) => true,
+  onValue: JSON.parse,
 };
 const storageType = "@@STORAGE_INIT";
 

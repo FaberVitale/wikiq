@@ -8,12 +8,12 @@ const breakpoints = {
     md: 960,
     sm: 600,
     xl: 1920,
-    xs: 0
-  }
+    xs: 0,
+  },
 };
 
 const typography = {
-  fontSize: 16
+  fontSize: 16,
 };
 
 /* both themes shares the same contrastText */
@@ -26,24 +26,24 @@ const palette1 = {
   main: "#ff5722",
   light: "#feb997",
   dark: "#d84012",
-  contrastText
+  contrastText,
 };
 
 const palette2 = {
   main: "#b71c1c",
   light: "#f05545",
   dark: "#7f0000",
-  contrastText
+  contrastText,
 };
 
 export const light = createMuiTheme({
   palette: {
     primary: palette1,
     secondary: palette2,
-    type: "light"
+    type: "light",
   },
   breakpoints,
-  typography
+  typography,
 });
 
 export const dark = createMuiTheme({
@@ -52,12 +52,12 @@ export const dark = createMuiTheme({
     secondary: {
       main: palette1.light,
       light: "#f2bfba",
-      dark: palette1.dark
+      dark: palette1.dark,
     },
-    type: "dark"
+    type: "dark",
   },
   breakpoints,
-  typography
+  typography,
 });
 
 /* properties shared between themes

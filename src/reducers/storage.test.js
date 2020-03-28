@@ -29,7 +29,7 @@ describe("src/reducers/storage", () => {
     _reset() {
       this._throw = false;
       this.clear();
-    }
+    },
   };
 
   const throwIt = () => {
@@ -66,13 +66,13 @@ describe("src/reducers/storage", () => {
 
     it("rejects item retrieved if it is not valid", () => {
       const item = null;
-      const isValid = val => val !== null;
+      const isValid = (val) => val !== null;
 
       mockStorage.setItem(key, JSON.stringify(item));
 
       const reducer = storage(mockReducer, key, {
         storage: mockStorage,
-        isValid
+        isValid,
       });
 
       expect(reducer(undefined, {})).toBe(initState);
@@ -94,7 +94,7 @@ describe("src/reducers/storage", () => {
 
       const reducer = storage(mockReducer, key, {
         storage: mockStorage,
-        isValid: throwIt
+        isValid: throwIt,
       });
 
       expect(reducer(undefined, initState)).toBe(initState);
@@ -105,7 +105,7 @@ describe("src/reducers/storage", () => {
 
       const reducer = storage(mockReducer, key, {
         storage: mockStorage,
-        onValue: throwIt
+        onValue: throwIt,
       });
 
       expect(reducer(undefined, {})).toBe(initState);
@@ -117,7 +117,7 @@ describe("src/reducers/storage", () => {
 
       const reducer = storage(mockReducer, key, {
         storage: mockStorage,
-        onValue: a => parseInt(a, 10) * 2
+        onValue: (a) => parseInt(a, 10) * 2,
       });
 
       expect(reducer(undefined, {})).toBe(value * 2);

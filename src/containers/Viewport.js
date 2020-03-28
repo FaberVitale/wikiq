@@ -8,13 +8,13 @@ import { $html } from "../util/dom";
 
 export type Viewport = {
   +viewportWidth: number,
-  +viewportHeight: number
+  +viewportHeight: number,
 };
 
 export const bitmask = {
   ALL: 7,
   VIEWPORT_WIDTH: 1,
-  VIEWPORT_HEIGHT: 2
+  VIEWPORT_HEIGHT: 2,
 };
 
 Object.freeze(bitmask);
@@ -25,7 +25,7 @@ Object.freeze(bitmask);
  */
 export const defaultViewport: Viewport = {
   viewportWidth: 0,
-  viewportHeight: 0
+  viewportHeight: 0,
 };
 
 Object.freeze(defaultViewport);
@@ -49,7 +49,7 @@ const getViewport: () => Viewport = () => {
 
   return {
     viewportWidth: $html.clientWidth,
-    viewportHeight: $html.clientHeight
+    viewportHeight: $html.clientHeight,
   };
 };
 
@@ -64,7 +64,7 @@ export const ViewportProvider = class ScrollProvider extends React.Component<
   state = { context: getViewport() };
 
   static defaultProps = {
-    children: null
+    children: null,
   };
 
   updateViewportIfNecessary: () => void = debounce(

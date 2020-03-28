@@ -7,7 +7,7 @@ import Zoom from "@material-ui/core/Zoom";
 type Props = {
   scrollY: number,
   threshold: number,
-  scrollTo: (...args: Array<mixed>) => void
+  scrollTo: (...args: Array<mixed>) => void,
 };
 
 /* Simple Back to Top button that is visible when window.scrollY
@@ -18,8 +18,8 @@ class BackToTop extends React.Component<Props> {
       position: "fixed",
       bottom: 10,
       right: 10,
-      zIndex: 500
-    }
+      zIndex: 500,
+    },
   };
 
   static isIn = (offset: number, threshold: number) => {

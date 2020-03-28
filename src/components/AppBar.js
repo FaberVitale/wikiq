@@ -6,7 +6,7 @@ import { default as LightBulb } from "../components/LightBulbButton";
 import { APP_TITLE, APPBAR_MIN_HEIGHT } from "../config";
 import { default as SearchFormView } from "./SearchForm";
 
-const style = theme => ({
+const style = (theme) => ({
   header: {
     // hide Flash of Unstyled Text, it happens in chrome
     animationName: "fadeIn",
@@ -25,15 +25,15 @@ const style = theme => ({
     justifyContent: "space-between",
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.main,
-    boxShadow: theme.shadows[4]
+    boxShadow: theme.shadows[4],
   },
   control: {
     flex: 1,
     display: "flex",
     justifyContent: "flex-end",
     [theme.breakpoints.down("xs")]: {
-      justifyContent: "space-between"
-    }
+      justifyContent: "space-between",
+    },
   },
   srOnlyIfXS: {
     [theme.breakpoints.down("xs")]: {
@@ -43,15 +43,15 @@ const style = theme => ({
       overflow: "hidden",
       border: 0,
       outline: 0,
-      position: "absolute"
-    }
-  }
+      position: "absolute",
+    },
+  },
 });
 
 type Props = {
   classes: MUIClasses,
   toggleTheme: () => void,
-  bulbLit: boolean
+  bulbLit: boolean,
 };
 
 class AppBar extends React.Component<Props> {

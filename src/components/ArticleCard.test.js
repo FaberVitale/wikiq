@@ -16,9 +16,9 @@ describe("src/components/ArticleCard", () => {
   });
 
   it("renders without crashing", () => {
-    const props = ids.map(id => ({
+    const props = ids.map((id) => ({
       info: articles[id],
-      thumbnail: thumbnails[id]
+      thumbnail: thumbnails[id],
     }));
 
     mount(

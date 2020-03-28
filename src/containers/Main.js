@@ -22,13 +22,13 @@ const styles = {
     margin: "0 auto",
     padding: 16,
     "@media all and (min-width: 1064px)": {
-      width: 1000
-    }
-  }
+      width: 1000,
+    },
+  },
 };
 
 type Props = {
-  classes: MUIClasses
+  classes: MUIClasses,
 };
 
 // render prop used to inject scrollY to BackToTop

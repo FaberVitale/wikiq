@@ -9,7 +9,7 @@ describe("src/util/query", () => {
 
   test("makeArticleId", () => {
     expect(
-      ids.every(id => id === fn.makeArticleId(lang, articles[id].title))
+      ids.every((id) => id === fn.makeArticleId(lang, articles[id].title))
     ).toBe(true);
     expect(fn.makeArticleId(lang, testString)).toMatchSnapshot();
   });
@@ -70,7 +70,7 @@ describe("src/util/query", () => {
   test("transformSearch", () => {
     expect(fn.transformSearch(lang, openSearch)).toEqual({
       ids,
-      articles: ids.map(id => articles[id])
+      articles: ids.map((id) => articles[id]),
     });
   });
 
@@ -81,7 +81,7 @@ describe("src/util/query", () => {
     expect(keys).not.toHaveLength(0);
     expect(
       keys.every(
-        key =>
+        (key) =>
           Object.prototype.hasOwnProperty.call(result[key], "source") &&
           Object.prototype.hasOwnProperty.call(result[key], "width") &&
           Object.prototype.hasOwnProperty.call(result[key], "height")
@@ -101,7 +101,7 @@ describe("src/util/query", () => {
         status: mockFetch.status,
         json() {
           return res;
-        }
+        },
       };
     };
 
@@ -119,36 +119,36 @@ describe("src/util/query", () => {
       window.fetch = realFetch;
     });
 
-    it("returns the object request if status is 200", done => {
+    it("returns the object request if status is 200", (done) => {
       expect.assertions(1);
 
-      return fn.fetchJSON("er").then(json => {
+      return fn.fetchJSON("er").then((json) => {
         expect(json).toBe(res);
         done();
       }, done);
     });
 
-    it("rejects if status isn't 200", done => {
+    it("rejects if status isn't 200", (done) => {
       mockFetch.status = 500;
 
       return fn.fetchJSON("url").then(
-        json => {
+        (json) => {
           done(new Error("Test failed: it should not return an object"));
         },
-        _ => {
+        (_) => {
           done();
         }
       );
     });
 
-    it("rejects if an error occurs", done => {
+    it("rejects if an error occurs", (done) => {
       mockFetch.throw = true;
 
       return fn
         .fetchJSON("url")
         .then(
           done.bind(null, new Error("Test Failed it should not fulfill")),
-          _ => {
+          (_) => {
             done();
           }
         );

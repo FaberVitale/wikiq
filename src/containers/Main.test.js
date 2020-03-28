@@ -6,7 +6,7 @@ import withMemoryRouter from "../__mocks__/withMemoryRouter";
 describe("src/components/AppBar", () => {
   const WrappedMain = withMemoryRouter(Main);
 
-  it("renders without crashing", done => {
+  it("renders without crashing", (done) => {
     const div = document.createElement("div");
     const Home = WrappedMain();
     const SearchResult = WrappedMain(["en/rem"]);

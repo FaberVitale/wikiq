@@ -38,9 +38,9 @@ export type ComputeChangedBitsFactory<C: {}> = (
   prop: Array<$Keys<C>>
 ) => ComputeChangedBits<C>;
 
-export const computeChangedBitsFactory: ComputeChangedBitsFactory<
-  *
-> = properties => {
+export const computeChangedBitsFactory: ComputeChangedBitsFactory<*> = (
+  properties
+) => {
   if (properties.length > 31) {
     throw new Error(
       "computeChangedBitsFactory: context api computeChangedBits supports " +

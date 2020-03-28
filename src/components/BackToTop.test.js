@@ -8,13 +8,13 @@ describe("src/components/BackToTop", () => {
   const propsFactory = (scrollY = 0, threshold = 0, scrollTo = () => {}) => ({
     scrollY,
     threshold,
-    scrollTo
+    scrollTo,
   });
 
   let shallow = createShallow();
   let wrapper;
 
-  it("renders without crashing", done => {
+  it("renders without crashing", (done) => {
     const div = document.createElement("div");
     const cleanUp = () => {
       ReactDOM.unmountComponentAtNode(div);
